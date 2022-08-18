@@ -1,0 +1,100 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="true" />
+    <option name="FORMATTER_TAGS_ENABLED" value="true" />
+    <option name="ENABLE_SECOND_REFORMAT" value="true" />
+    <CssCodeStyleSettings>
+      <option name="HEX_COLOR_LOWER_CASE" value="true" />
+      <option name="HEX_COLOR_LONG_FORMAT" value="true" />
+      <option name="BLANK_LINES_BETWEEN_BLOCKS" value="0" />
+      <option name="BLANK_LINES_AROUND_NESTED_SELECTOR" value="0" />
+      <option name="KEEP_SINGLE_LINE_BLOCKS" value="true" />
+      <option name="ENFORCE_QUOTES_ON_FORMAT" value="true" />
+    </CssCodeStyleSettings>
+    <HTMLCodeStyleSettings>
+      <option name="HTML_ATTRIBUTE_WRAP" value="4" />
+      <option name="HTML_SPACE_INSIDE_EMPTY_TAG" value="true" />
+      <option name="HTML_ENFORCE_QUOTES" value="true" />
+    </HTMLCodeStyleSettings>
+    <JSCodeStyleSettings version="0">
+      <option name="FORCE_SEMICOLON_STYLE" value="true" />
+      <option name="FORCE_QUOTE_STYlE" value="true" />
+    </JSCodeStyleSettings>
+    <JSON>
+      <option name="KEEP_TRAILING_COMMA" value="true" />
+    </JSON>
+    <Markdown>
+      <option name="WRAP_TEXT_IF_LONG" value="false" />
+      <option name="KEEP_LINE_BREAKS_INSIDE_TEXT_BLOCKS" value="false" />
+    </Markdown>
+    <TypeScriptCodeStyleSettings version="0">
+      <option name="JSDOC_INCLUDE_TYPES" value="true" />
+      <option name="FORCE_SEMICOLON_STYLE" value="true" />
+      <option name="SPACE_WITHIN_ARRAY_INITIALIZER_BRACKETS" value="true" />
+      <option name="FORCE_QUOTE_STYlE" value="true" />
+      <option name="SPACES_WITHIN_OBJECT_LITERAL_BRACES" value="true" />
+      <option name="SPACES_WITHIN_IMPORTS" value="true" />
+      <option name="SPACES_WITHIN_INTERPOLATION_EXPRESSIONS" value="true" />
+    </TypeScriptCodeStyleSettings>
+    <VueCodeStyleSettings>
+      <option name="UNIFORM_INDENT" value="false" />
+    </VueCodeStyleSettings>
+    <codeStyleSettings language="CSS">
+      <option name="BLOCK_COMMENT_ADD_SPACE" value="true" />
+      <indentOptions>
+        <option name="CONTINUATION_INDENT_SIZE" value="4" />
+        <option name="USE_TAB_CHARACTER" value="true" />
+        <option name="SMART_TABS" value="true" />
+      </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="HTML">
+      <indentOptions>
+        <option name="USE_TAB_CHARACTER" value="true" />
+        <option name="SMART_TABS" value="true" />
+      </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="JSON">
+      <option name="SPACE_AFTER_COMMA" value="false" />
+      <indentOptions>
+        <option name="INDENT_SIZE" value="4" />
+        <option name="USE_TAB_CHARACTER" value="true" />
+        <option name="SMART_TABS" value="true" />
+      </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="JavaScript">
+      <indentOptions>
+        <option name="USE_TAB_CHARACTER" value="true" />
+        <option name="SMART_TABS" value="true" />
+      </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="Markdown">
+      <option name="WRAP_ON_TYPING" value="0" />
+    </codeStyleSettings>
+    <codeStyleSettings language="Twig">
+      <indentOptions>
+        <option name="USE_TAB_CHARACTER" value="true" />
+        <option name="SMART_TABS" value="true" />
+      </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="TypeScript">
+      <option name="KEEP_FIRST_COLUMN_COMMENT" value="false" />
+      <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
+      <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
+      <option name="SPACE_WITHIN_METHOD_CALL_PARENTHESES" value="true" />
+      <option name="SPACE_WITHIN_METHOD_PARENTHESES" value="true" />
+      <option name="SPACE_WITHIN_IF_PARENTHESES" value="true" />
+      <option name="SPACE_WITHIN_WHILE_PARENTHESES" value="true" />
+      <option name="SPACE_WITHIN_FOR_PARENTHESES" value="true" />
+      <option name="SPACE_WITHIN_CATCH_PARENTHESES" value="true" />
+      <option name="SPACE_WITHIN_SWITCH_PARENTHESES" value="true" />
+      <option name="SPACE_WITHIN_BRACKETS" value="true" />
+      <option name="SPACE_BEFORE_METHOD_LBRACE" value="false" />
+      <option name="KEEP_SIMPLE_BLOCKS_IN_ONE_LINE" value="true" />
+      <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
+      <indentOptions>
+        <option name="USE_TAB_CHARACTER" value="true" />
+        <option name="SMART_TABS" value="true" />
+      </indentOptions>
+    </codeStyleSettings>
+  </code_scheme>
+</component>
