@@ -17,7 +17,7 @@ const handler = async ( _req: NextApiRequest, res: NextApiResponse ) => {
 			return {
 				code: data.cod,
 				message: data.message,
-				weather: data.list.map( forecast => {
+				forecasts: data.list.map( forecast => {
 					return {
 						date: forecast.dt,
 						temperature: {
@@ -35,7 +35,7 @@ const handler = async ( _req: NextApiRequest, res: NextApiResponse ) => {
 					};
 				} ),
 				city: { name: data.city.name, sunrise: data.city.sunrise, sunset: data.city.sunset },
-				raw: data,
+				//raw: data,
 			};
 		} )
 		.then( data => res.status( 200 ).json( data ) );
