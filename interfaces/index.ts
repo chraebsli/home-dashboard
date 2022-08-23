@@ -1,34 +1,38 @@
-// You can include shared interfaces/types in a separate file
-// and then use them in any component by importing them. For
-// example, to import the interface below do:
-//
-// import { User } from 'path/to/interfaces';
+export type CurrentWeatherData = OWMCurrentWeatherData | AWCurrentWeatherData;
 
-export type User = {
-	id: number
-	name: string
-}
-
-export type WeatherData = {
-	code: "200" | string,
-	message: string | number,
-	forecasts: WeatherForecast[],
-	city: { name: string, sunrise: number, sunset: number }
-}
-
-export type WeatherForecast = {
-	date: number,
+export type OWMCurrentWeatherData = {
+	description: string,
+	icon: string,
 	temperature: {
-		temp: number,
-		feels: number,
+		real: number,
+		feel: number
 	},
-	weather: {
-		name: string,
-		description: string,
-		icon: string,
+	wind: {
+		direction: number,
+		speed: number
 	},
-	wind: { speed: number, deg: number, gust: number },
-	clouds: { all: number },
-	rain: { "3h": number },
+	sunrise: number,
+	sunset: number,
+	service: "openweathermap",
+	cached: boolean
+}
+
+export type AWCurrentWeatherData = {
+	description: string,
+	icon: number,
+	temperature: {
+		real: number,
+		feel: number
+	},
+	wind: {
+		direction: "N" | "NE" | "E" | "SE" | "S" | "SW" | "W" | "NW",
+		speed: number
+	},
+	uvIndex: number,
+	precipitation: {
+		now: number
+	},
+	service: "accuweather",
+	cached: true
 
 }

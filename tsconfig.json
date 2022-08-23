@@ -30,6 +30,9 @@
 			],
 			"@pages/*": [
 				"pages/*"
+			],
+			"@utils/*": [
+				"utils/*"
 			]
 		},
 		"incremental": true
