@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Stack, Typography } from "@mui/material";
 import { CurrentWeatherData } from "@interfaces/index";
-import { round } from "@utils/functions";
+import { addZero, round } from "@utils/functions";
 
 const formatTemperature = ( weather: CurrentWeatherData ) => {
 	const { real, feel } = weather.temperature;
@@ -20,7 +20,7 @@ const formatTemperature = ( weather: CurrentWeatherData ) => {
 const formatSunTime = ( weather: CurrentWeatherData, time: "sunrise" | "sunset" ) => {
 	const date = new Date( weather[ time ]*1000 );
 	console.log( date );
-	return `${ date.getHours() }:${ date.getMinutes() }`;
+	return `${ addZero(date.getHours()) }:${ addZero(date.getMinutes()) }`;
 };
 
 const Weather = ( { size }: { size: number } ) => {
@@ -42,7 +42,7 @@ const Weather = ( { size }: { size: number } ) => {
 	}, [] );
 
 	return (
-		<Grid item xs={ size } className="clock item" sx={ {
+		<Grid item xs={ size } className="weather item" sx={ {
 			padding: "1rem",
 		} }>
 			<Stack direction={ "column" } spacing={ 1 }>

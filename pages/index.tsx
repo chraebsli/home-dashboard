@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import Layout from "@components/Layout";
 import Clock from "@components/elements/Clock";
 import Weather from "@components/elements/Weather";
+import Forecast from "@components/elements/Forecast";
 
 const App = () => (
 	<Layout>
@@ -15,12 +16,12 @@ const App = () => (
 			<Grid container item xs={ 2 }>
 				<Clock size={ 2 } />
 				<Grid item xs={ 8 } className="news"></Grid>
-				<Weather size={2} />
+				<Weather size={ 2 } />
 			</Grid>
 			<Grid container item xs={ 8 }>
 				<Grid item xs={ 2 } className="calendar"></Grid>
 				<Grid item xs={ 8 } className="main"></Grid>
-				<Grid item xs={ 2 } className="forecast"></Grid>
+				<Forecast size={ 2 } />
 			</Grid>
 			<Grid container item xs={ 2 }>
 				<Grid item xs={ 12 } className="action"></Grid>

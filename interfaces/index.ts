@@ -1,4 +1,5 @@
 export type CurrentWeatherData = OWMCurrentWeatherData | AWCurrentWeatherData;
+export type ForecastWeatherData = OWMForecastWeatherData;
 
 export type OWMCurrentWeatherData = {
 	description: string,
@@ -36,3 +37,35 @@ export type AWCurrentWeatherData = {
 	cached: true
 
 }
+
+export type OWMForecastWeatherData = {
+	code: string,
+	message: number | string,
+	forecasts: OWMForecast[],
+	city: {
+		name: string,
+	},
+	service: "openweathermap",
+	cached: boolean
+}
+
+export type OWMForecast = {
+	time: number,
+	temperature: {
+		real: number,
+		feel: number,
+	},
+	weather: {
+		id: number,
+		main: string,
+		description: string,
+		icon: string
+	},
+	wind: {
+		speed: number,
+		direction: number,
+	},
+
+}
+
+export type AWForecastWeatherData = {}

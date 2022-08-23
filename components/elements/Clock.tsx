@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Stack, Typography } from "@mui/material";
-
-const addZero = ( number: number ) => number < 10 ? `0${ number }` : number;
+import { addZero } from "@utils/functions";
 
 const formatTime = ( time: Date ) => {
 	const hours = addZero( time.getHours() );
