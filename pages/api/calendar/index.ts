@@ -16,7 +16,7 @@ const formatDate = (date: string) => {
 	const year = date.substring(0, 4);
 	const month = date.substring(4, 6);
 	const day = date.substring(6, 8);
-	if (date.length === 16) {
+	if ([ 15, 16 ].includes(date.length)) {
 		const hour = date.substring(9, 11);
 		const minute = date.substring(11, 13);
 		const second = date.substring(13, 15);
@@ -27,7 +27,6 @@ const formatDate = (date: string) => {
 };
 
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
-	console.log(formatDate("20220825T103000Z"));
 	const events = await Promise.all(sources.map(async (url) => {
 			const icsText = await fetch(url).then((r) => r.text());
 			const calendar = ICalParser.toJSON(icsText);
@@ -38,11 +37,17 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 					calendar: calendar.calendar.xWrCalname as string,
 					summary: event.summary,
 					description: event.description,
+					location: event.location,
 					start: formatDate(event.dtstart.value),
 					end: event.dtend?.value ? formatDate(event.dtend?.value) : null,
 					stamp: formatDate(event.dtstamp.value),
 					created: formatDate(event.created.value),
+					modified: formatDate(event.lastModified?.value),
 					id: event.uid,
+					rule: event.rrule,
+					exdates: event.exdate?.map((exdate) => formatDate(exdate.value)),
+					//raw: event,
+
 				};
 			});
 		}),
@@ -50,8 +55,8 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 	const newEvents = events
 		.flat()
 		.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime())
-		.filter((event) => new Date(event.start).getTime() > new Date().getTime(),
-		);
+		.filter((event) => new Date(event.end).getTime() > new Date().getTime()
+			|| (event.exdates && new Date(event.end).getTime() > new Date().getTime()));
 
 	res.status(200).json(newEvents);
 };
