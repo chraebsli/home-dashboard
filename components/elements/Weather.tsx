@@ -5,9 +5,11 @@ import React, { useEffect, useState } from "react";
 
 const formatTemperature = (weather: CurrentWeatherData) => {
 	const { real, feel } = weather.temperature;
-	const feelsElement = <Typography variant="h5"
-	                                 component={ "span" }
-	                                 sx={ { color: "text.secondary" } }>/{ round(feel, 1) }</Typography>;
+	const feelsElement = (
+		<Typography variant="h5" component={ "span" } sx={ { color: "text.secondary" } }>
+			/{ round(feel, 1) }
+		</Typography>
+	);
 	return (
 		<>
 			{ round(real, 1) }
@@ -53,21 +55,24 @@ const Weather = ({ size }: { size: number }) => {
 						alignItems: "center",
 					} }>
 						<img width={ 30 } src={ "/i/sunrise.png" } alt={ "sunrise icon" } />
-						<Typography variant="h6"
-						            component="span">{ weather ? formatSunTime(weather, "sunrise") : null }</Typography>
+						<Typography variant="h6" component="span">
+							{ weather ? formatSunTime(weather, "sunrise") : null }
+						</Typography>
 					</Stack>
 					<Stack direction={ "row" } spacing={ 1 } sx={ {
 						alignItems: "center",
 					} }>
 						<img width={ 30 } src={ "/i/sunset.png" } alt={ "sunset icon" } />
-						<Typography variant="h6"
-						            component="span">{ weather ? formatSunTime(weather, "sunset") : null }</Typography>
+						<Typography variant="h6" component="span">
+							{ weather ? formatSunTime(weather, "sunset") : null }
+						</Typography>
 					</Stack>
 				</Stack>
 				<Stack direction={ "row" } spacing={ 1 }>
 					<img width={ 30 } src={ "/i/temperature.svg" } alt={ "temperature icon" } />
-					<Typography variant="h4"
-					            component="span">{ weather ? formatTemperature(weather) : null }</Typography>
+					<Typography variant="h4" component="span">
+						{ weather ? formatTemperature(weather) : null }
+					</Typography>
 				</Stack>
 			</Stack>
 		</Grid>

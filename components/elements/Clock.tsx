@@ -5,11 +5,11 @@ import React, { useEffect, useState } from "react";
 const formatTime = (time: Date) => {
 	const hours = addZero(time.getHours());
 	const minutes = addZero(time.getMinutes());
-	return `${ hours }:${ minutes }`;
+	return `${hours}:${minutes}`;
 };
 const formatSeconds = (time: Date) => {
 	const seconds = addZero(time.getSeconds());
-	return `${ seconds }`;
+	return `${seconds}`;
 };
 
 enum Day {
@@ -19,7 +19,7 @@ enum Day {
 	Thursday = 4,
 	Friday = 5,
 	Saturday = 6,
-	Sunday = 7
+	Sunday = 7,
 }
 
 enum Month {
@@ -34,11 +34,11 @@ enum Month {
 	September = 9,
 	October = 10,
 	November = 11,
-	December = 12
+	December = 12,
 }
 
 const Clock = ({ size }: { size: number }) => {
-	const [ time, setTime ] = useState(new Date());
+	const [time, setTime] = useState(new Date());
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -51,22 +51,34 @@ const Clock = ({ size }: { size: number }) => {
 	}, []);
 
 	return (
-		<Grid item xs={ size } className="clock item" sx={ {
-			padding: "1rem",
-		} }>
-			<Stack spacing={ 0 } direction={ "column" }>
-				<Stack direction={ "row" }>
-					<Typography variant={ "h5" } component={ "span" }>{ `${ Day[time.getDay()] },` }</Typography>
+		<Grid
+			item
+			xs={size}
+			className="clock item"
+			sx={{
+				padding: "1rem",
+			}}>
+			<Stack spacing={0} direction={"column"}>
+				<Stack direction={"row"}>
+					<Typography variant={"h5"} component={"span"}>{`${Day[time.getDay()]},`}</Typography>
 				</Stack>
-				<Stack direction={ "row" } spacing={ .5 }>
-					<Typography variant={ "h5" }
-					            component={ "span" }>{ `${ time.getDate() }. ${ Month[time.getMonth()] } ${ time.getFullYear() }` }</Typography>
+				<Stack direction={"row"} spacing={0.5}>
+					<Typography variant={"h5"} component={"span"}>{`${time.getDate()}. ${
+						Month[time.getMonth()]
+					} ${time.getFullYear()}`}</Typography>
 				</Stack>
-				<Stack direction={ "row" }>
-					<Typography variant={ "h1" } component={ "span" }>{ formatTime(time) }</Typography>
-					<Typography variant={ "h5" } component={ "span" } sx={ {
-						color: "text.secondary",
-					} }>{ formatSeconds(time) }</Typography>
+				<Stack direction={"row"}>
+					<Typography variant={"h1"} component={"span"}>
+						{formatTime(time)}
+					</Typography>
+					<Typography
+						variant={"h5"}
+						component={"span"}
+						sx={{
+							color: "text.secondary",
+						}}>
+						{formatSeconds(time)}
+					</Typography>
 				</Stack>
 			</Stack>
 		</Grid>

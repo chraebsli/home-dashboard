@@ -8,11 +8,10 @@ import React from "react";
 
 const App = () => (
 	<Layout>
-		<Grid container direction={ "column" }
-		      sx={ {
-			      backgroundColor: "background.default",
-			      padding: "1rem",
-		      } }
+		<Grid container direction={ "column" } sx={ {
+			backgroundColor: "background.default",
+			padding: "1rem",
+		} }
 		>
 			<Grid container item xs={ 2 }>
 				<Clock size={ 2 } />
