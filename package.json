@@ -1,5 +1,14 @@
 {
+
+	"author": "Nicholas Krebs contact@nicholas-krebs.ch https://www.nicholas-krebs.ch",
+	"version": "0.1.0",
 	"private": true,
+	"name": "home-dashboard",
+	"description": "A dashboard for my home to display information and control devices",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/chraebslii/home-dashboard.git"
+	},
 	"scripts": {
 		"dev": "next",
 		"build": "next build",
