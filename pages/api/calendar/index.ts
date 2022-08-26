@@ -47,7 +47,6 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 					rule: event.rrule,
 					exdates: event.exdate?.map((exdate) => formatDate(exdate.value)),
 					//raw: event,
-
 				};
 			});
 		}),

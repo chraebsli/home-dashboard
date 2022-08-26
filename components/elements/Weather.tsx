@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Grid, Stack, Typography } from "@mui/material";
 import { CurrentWeatherData } from "@interfaces/index";
+import { Grid, Stack, Typography } from "@mui/material";
 import { addZero, round } from "@utils/functions";
+import React, { useEffect, useState } from "react";
 
 const formatTemperature = ( weather: CurrentWeatherData ) => {
 	const { real, feel } = weather.temperature;
@@ -27,7 +27,7 @@ const Weather = ( { size }: { size: number } ) => {
 	const [ weather, setWeather ] = useState( null );
 
 	const getData = () => {
-		fetch( `http://localhost:3000/api/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/current` )
+		fetch( `${process.env.NEXT_PUBLIC_API_URL}/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/current` )
 			.then( res => res.json() as Promise<CurrentWeatherData> )
 			.then( data => {
 				data.temperature ? setWeather( data ) : null;
@@ -52,20 +52,20 @@ const Weather = ( { size }: { size: number } ) => {
 					<Stack direction={ "row" } spacing={ 1 } sx={ {
 						alignItems: "center"
 					} }>
-						<img width={ 30 } src={ "/i/sunrise.png" } />
+						<img width={ 30 } src={ "/i/sunrise.png" } alt={"sunrise icon"}/>
 						<Typography variant="h6"
 						            component="span">{ weather ? formatSunTime( weather, "sunrise" ) : null }</Typography>
 					</Stack>
 					<Stack direction={ "row" } spacing={ 1 } sx={ {
 						alignItems: "center"
 					} }>
-						<img width={ 30 } src={ "/i/sunset.png" } />
+						<img width={ 30 } src={ "/i/sunset.png" } alt={"sunset icon"}/>
 						<Typography variant="h6"
 						            component="span">{ weather ? formatSunTime( weather, "sunset" ) : null }</Typography>
 					</Stack>
 				</Stack>
 				<Stack direction={ "row" } spacing={ 1 }>
-					<img width={ 30 } src={ "/i/temperature.svg" } />
+					<img width={ 30 } src={ "/i/temperature.svg" } alt={"temperature icon"}/>
 					<Typography variant="h4"
 					            component="span">{ weather ? formatTemperature( weather ) : null }</Typography>
 				</Stack>

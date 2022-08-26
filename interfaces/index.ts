@@ -69,3 +69,17 @@ export type OWMForecast = {
 }
 
 export type AWForecastWeatherData = {}
+
+export type CalendarEvent = {
+	calendar: string,
+	summary: string,
+	description: string,
+	location: string,
+	start: string,
+	end: string,
+	stamp: string,
+	created: string,
+	modified: string,
+	id: string,
+	rule: string
+}

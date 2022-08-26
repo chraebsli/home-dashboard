@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import { ForecastWeatherData, OWMForecast } from "@interfaces/index";
+import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import { addZero, round, toFloat } from "@utils/functions";
+import React, { useEffect, useState } from "react";
 
 const formatDate = ( date: number ) => {
 	const newDate = new Date( date * 1000 );
@@ -12,7 +12,7 @@ const Forecast = ( { size }: { size: number } ) => {
 	const [ weather, setWeather ] = useState( null );
 
 	const getData = () => {
-		fetch( `http://localhost:3000/api/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/forecast` )
+		fetch( `${process.env.NEXT_PUBLIC_API_URL}/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/forecast` )
 			.then( res => res.json() as Promise<ForecastWeatherData> )
 			.then( data => {
 				data.forecasts ? setWeather( data ) : null;

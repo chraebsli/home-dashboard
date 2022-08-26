@@ -1,9 +1,10 @@
-import React from "react";
-import { Grid } from "@mui/material";
-import Layout from "@components/Layout";
+import Calendar from "@components/elements/Calendar";
 import Clock from "@components/elements/Clock";
-import Weather from "@components/elements/Weather";
 import Forecast from "@components/elements/Forecast";
+import Weather from "@components/elements/Weather";
+import Layout from "@components/Layout";
+import { Grid } from "@mui/material";
+import React from "react";
 
 const App = () => (
 	<Layout>
@@ -19,8 +20,8 @@ const App = () => (
 				<Weather size={ 2 } />
 			</Grid>
 			<Grid container item xs={ 8 }>
-				<Grid item xs={ 2 } className="calendar"></Grid>
-				<Grid item xs={ 8 } className="main"></Grid>
+				<Calendar size={ 5 } />
+				<Grid item xs={ 5 } className="main"></Grid>
 				<Forecast size={ 2 } />
 			</Grid>
 			<Grid container item xs={ 2 }>
