@@ -3,28 +3,28 @@ import { Box, Divider, Grid, Stack, Typography } from "@mui/material";
 import { addZero, round, toFloat } from "@utils/functions";
 import React, { useEffect, useState } from "react";
 
-const formatDate = ( date: number ) => {
-	const newDate = new Date( date * 1000 );
-	return `${ addZero( newDate.getHours() ) }:${ addZero( newDate.getMinutes() ) }`;
+const formatDate = (date: number) => {
+	const newDate = new Date(date * 1000);
+	return `${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 };
 
-const Forecast = ( { size }: { size: number } ) => {
-	const [ weather, setWeather ] = useState( null );
+const Forecast = ({ size }: { size: number }) => {
+	const [ weather, setWeather ] = useState(null);
 
 	const getData = () => {
-		fetch( `${process.env.NEXT_PUBLIC_API_URL}/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/forecast` )
-			.then( res => res.json() as Promise<ForecastWeatherData> )
-			.then( data => {
-				data.forecasts ? setWeather( data ) : null;
-			} );
+		fetch(`${ process.env.NEXT_PUBLIC_API_URL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/forecast`)
+			.then(res => res.json() as Promise<ForecastWeatherData>)
+			.then(data => {
+				data.forecasts ? setWeather(data) : null;
+			});
 	};
 
-	useEffect( () => {
+	useEffect(() => {
 		getData();
-		setInterval( () => {
+		setInterval(() => {
 			getData();
-		}, 1000 * 60 * 60 );
-	}, [] );
+		}, 1000 * 60 * 60);
+	}, []);
 
 	return (
 		<Grid item xs={ size } className="forecast item" sx={ {
@@ -36,7 +36,7 @@ const Forecast = ( { size }: { size: number } ) => {
 					<Divider />
 				</Box>
 				{
-					weather?.forecasts.map( ( forecast: OWMForecast, index ) => {
+					weather?.forecasts.map((forecast: OWMForecast, index) => {
 						return index < 12
 							? (
 								<Box key={ index } sx={ {
@@ -45,20 +45,20 @@ const Forecast = ( { size }: { size: number } ) => {
 									justifyContent: "space-between",
 								} }>
 									<Typography variant={ "h6" }
-									            component={ "span" }>{ formatDate( forecast.time ) }</Typography>
+									            component={ "span" }>{ formatDate(forecast.time) }</Typography>
 									<img width={ 30 }
 									     src={ `http://openweathermap.org/img/wn/${ forecast.weather.icon }@2x.png` }
 									     alt={ forecast.weather.description } />
 									<Typography variant={ "h6" }
-									            component={ "span" }>{ toFloat( round( forecast.temperature.real, 1 ) ) }°</Typography>
+									            component={ "span" }>{ toFloat(round(forecast.temperature.real, 1)) }°</Typography>
 									<Typography variant={ "h6" }
 									            component={ "span" } sx={ {
 										color: "text.secondary",
-									} }>{ toFloat( round( forecast.temperature.feel, 1 ) ) }°</Typography>
+									} }>{ toFloat(round(forecast.temperature.feel, 1)) }°</Typography>
 									<Divider />
 								</Box>)
 							: null;
-					} )
+					})
 				}
 			</Stack>
 		</Grid>

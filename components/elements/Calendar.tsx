@@ -58,9 +58,9 @@ const Calendar = ({ size }: { size: number }) => {
 										<Typography variant={ "h6" } component={ "span" }>{ event.summary }</Typography>
 									</Grid>
 									<Grid item xs={ .5 }></Grid>
-									<Grid item xs={ 11.5 } sx={{
+									<Grid item xs={ 11.5 } sx={ {
 										marginTop: "-.5rem",
-									}}>
+									} }>
 										<Typography variant={ "h6" } component={ "span" } sx={ {
 											color: "text.secondary",
 										} }>

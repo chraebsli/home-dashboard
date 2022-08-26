@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import React, { ReactNode } from "react";
 
-const defaultTheme = createTheme( {
+const defaultTheme = createTheme({
 	palette: {
 		primary: { main: "#ffffff" },
 		text: {
@@ -24,10 +24,10 @@ const defaultTheme = createTheme( {
 		h6: {
 			fontSize: 20,
 		},
-	}
-} );
+	},
+});
 
-export default function Layout( { children }: { children?: ReactNode } ){
+export default function Layout({ children }: { children?: ReactNode }){
 	return (
 		<>
 			<ThemeProvider theme={ defaultTheme }>
