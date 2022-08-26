@@ -37,11 +37,11 @@ const formatSunTime = (weather: CurrentWeatherData, time: "sunrise" | "sunset") 
 	return `${ addZero(date.getHours()) }:${ addZero(date.getMinutes()) }`;
 };
 
-const Weather = ({ size }: { size: number }) => {
+const Weather = ({ size, apiURL }: { size: number, apiURL: string }) => {
 	const [ weather, setWeather ] = useState(null);
 
 	const getData = () => {
-		fetch(`${ process.env.NEXT_PUBLIC_API_URL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/current`)
+		fetch(`${ apiURL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/current`)
 			.then(res => res.json() as Promise<CurrentWeatherData>)
 			.then(data => {
 				data.temperature ? setWeather(data) : null;

@@ -8,11 +8,12 @@ const formatDate = (date: number) => {
 	return `${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 };
 
-const Forecast = ({ size }: { size: number }) => {
+const Forecast = ({ size, apiURL }: { size: number, apiURL: string }) => {
 	const [ weather, setWeather ] = useState(null);
 
 	const getData = () => {
-		fetch(`${ process.env.NEXT_PUBLIC_API_URL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/forecast`)
+		console.log(process.env.NEXT_PUBLIC_API_URL);
+		fetch(`${ apiURL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/forecast`)
 			.then(res => res.json() as Promise<ForecastWeatherData>)
 			.then(data => {
 				data.forecasts ? setWeather(data) : null;

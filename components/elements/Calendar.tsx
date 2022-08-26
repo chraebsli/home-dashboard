@@ -25,11 +25,11 @@ const formatDate = (date: string, fullDay = false) => {
 		: `${ addZero(newDate.getDate()) }.${ addZero(newDate.getMonth() + 1) } ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 };
 
-const Calendar = ({ size }: { size: number }) => {
+const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 	const [ calendar, setCalendar ] = useState(null);
 
 	const getData = () => {
-		fetch(`${ process.env.NEXT_PUBLIC_API_URL }/calendar/`)
+		fetch(`${ apiURL }/calendar/`)
 			.then(res => res.json() as Promise<CalendarEvent[]>)
 			.then(data => {
 				data[0].calendar ? setCalendar(data) : null;
