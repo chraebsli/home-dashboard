@@ -1,3 +1,4 @@
+import { CurrentWeatherData } from "@interfaces/index";
 import Config from "@pages/api/weather/owm/config";
 import { currentTestWeatherData } from "@utils/OWMTestWeatherData";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -25,7 +26,7 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 
 					service: "openweathermap",
 					cached: false,
-				};
+				} as CurrentWeatherData;
 			})
 			.then(data => res.status(200).json(data));
 	} else {

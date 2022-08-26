@@ -48,7 +48,7 @@ const Forecast = ({ size }: { size: number }) => {
 										{ formatDate(forecast.time) }
 									</Typography>
 									<img width={ 40 } style={ {
-										backgroundColor: "#8d8d8d",
+										backgroundColor: "#b4b4b4",
 										borderRadius: "50%",
 									} }
 									     src={ `http://openweathermap.org/img/wn/${ forecast.weather.icon }@2x.png` }

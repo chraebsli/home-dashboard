@@ -3,6 +3,18 @@ import { Grid, Stack, Typography } from "@mui/material";
 import { addZero, round } from "@utils/functions";
 import React, { useEffect, useState } from "react";
 
+const formatDirection = (deg: number) => {
+	if (deg > 337.5) return "N";
+	if (deg > 292.5) return "NW";
+	if (deg > 247.5) return "W";
+	if (deg > 202.5) return "SW";
+	if (deg > 157.5) return "S";
+	if (deg > 122.5) return "SE";
+	if (deg > 67.5) return "E";
+	if (deg > 22.5) return "NE";
+	return "N";
+};
+
 const formatTemperature = (weather: CurrentWeatherData) => {
 	const { real, feel } = weather.temperature;
 	const feelsElement = (
@@ -74,6 +86,13 @@ const Weather = ({ size }: { size: number }) => {
 					<Typography variant="h4" component="span">
 						{ weather ? formatTemperature(weather) : null }
 					</Typography>
+				</Stack>
+				<Stack direction={ "row" } spacing={ 1 }>
+					<img width={ 30 } src={ "/i/wind.svg" } alt={ "wind icon" } />
+					<Typography variant="h6" component="span" sx={ { color: "text.secondary" } }>
+						{ formatDirection(weather?.wind?.direction) }
+					</Typography>
+					<Typography variant="h6" component="span">{ round(weather?.wind?.speed, 0) } km/h</Typography>
 				</Stack>
 			</Stack>
 		</Grid>
