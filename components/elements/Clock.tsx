@@ -5,11 +5,11 @@ import React, { useEffect, useState } from "react";
 const formatTime = (time: Date) => {
 	const hours = addZero(time.getHours());
 	const minutes = addZero(time.getMinutes());
-	return `${hours}:${minutes}`;
+	return `${ hours }:${ minutes }`;
 };
 const formatSeconds = (time: Date) => {
 	const seconds = addZero(time.getSeconds());
-	return `${seconds}`;
+	return `${ seconds }`;
 };
 
 enum Day {
@@ -38,7 +38,7 @@ enum Month {
 }
 
 const Clock = ({ size }: { size: number }) => {
-	const [time, setTime] = useState(new Date());
+	const [ time, setTime ] = useState(new Date());
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -53,31 +53,31 @@ const Clock = ({ size }: { size: number }) => {
 	return (
 		<Grid
 			item
-			xs={size}
+			xs={ size }
 			className="clock item"
-			sx={{
+			sx={ {
 				padding: "1rem",
-			}}>
-			<Stack spacing={0} direction={"column"}>
-				<Stack direction={"row"}>
-					<Typography variant={"h5"} component={"span"}>{`${Day[time.getDay()]},`}</Typography>
+			} }>
+			<Stack spacing={ 0 } direction={ "column" }>
+				<Stack direction={ "row" }>
+					<Typography variant={ "h5" } component={ "span" }>{ `${ Day[time.getDay()] },` }</Typography>
 				</Stack>
-				<Stack direction={"row"} spacing={0.5}>
-					<Typography variant={"h5"} component={"span"}>{`${time.getDate()}. ${
+				<Stack direction={ "row" } spacing={ 0.5 }>
+					<Typography variant={ "h5" } component={ "span" }>{ `${ time.getDate() }. ${
 						Month[time.getMonth()]
-					} ${time.getFullYear()}`}</Typography>
+					} ${ time.getFullYear() }` }</Typography>
 				</Stack>
-				<Stack direction={"row"}>
-					<Typography variant={"h1"} component={"span"}>
-						{formatTime(time)}
+				<Stack direction={ "row" }>
+					<Typography variant={ "h1" } component={ "span" }>
+						{ formatTime(time) }
 					</Typography>
 					<Typography
-						variant={"h5"}
-						component={"span"}
-						sx={{
+						variant={ "h5" }
+						component={ "span" }
+						sx={ {
 							color: "text.secondary",
-						}}>
-						{formatSeconds(time)}
+						} }>
+						{ formatSeconds(time) }
 					</Typography>
 				</Stack>
 			</Stack>

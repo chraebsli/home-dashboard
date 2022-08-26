@@ -48,14 +48,14 @@ const Forecast = ({ size }: { size: number }) => {
 										{ formatDate(forecast.time) }
 									</Typography>
 									<img width={ 30 }
-										src={ `http://openweathermap.org/img/wn/${ forecast.weather.icon }@2x.png` }
-										alt={ forecast.weather.description } />
+									     src={ `http://openweathermap.org/img/wn/${ forecast.weather.icon }@2x.png` }
+									     alt={ forecast.weather.description } />
 									<Typography variant={ "h6" } component={ "span" }>
 										{ toFloat(round(forecast.temperature.real, 1)) }°
 									</Typography>
 									<Typography variant={ "h6" }
-												component={ "span" }
-												sx={ { color: "text.secondary" } }>
+									            component={ "span" }
+									            sx={ { color: "text.secondary" } }>
 										{ toFloat(round(forecast.temperature.feel, 1)) }°</Typography>
 									<Divider />
 								</Box>)
