@@ -4,16 +4,25 @@ import { Grid, Stack, Typography } from "@mui/material";
 import { addZero } from "@utils/functions";
 import React, { useEffect, useState } from "react";
 
-const formatDate = (date: string) => {
+const formatDate = (date: string, fullDay = false) => {
+	console.log(fullDay);
 	const newDate = new Date(date);
 	if (newDate.toDateString() === new Date().toDateString()) {
-		return `Today, ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
+		return fullDay
+			? "Today"
+			: `Today, ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 	} else if (newDate.toDateString() === new Date(new Date().setDate(new Date().getDate() + 1)).toDateString()) {
-		return `Tomorrow, ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
+		return fullDay
+			? "Tomorrow"
+			: `Tomorrow, ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 	} else if (newDate.getFullYear() === new Date().getFullYear() && newDate.getMonth() === new Date().getMonth() && newDate.getDate() >= new Date().getDate() && newDate.getDate() <= new Date().getDate() + 7) {
-		return `${ newDate.toLocaleString("en-us", { weekday: "long" }) }, ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
+		return fullDay
+			? `${ newDate.toLocaleString("en-us", { weekday: "long" }) }`
+			: `${ newDate.toLocaleString("en-us", { weekday: "long" }) }, ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 	}
-	return `${ addZero(newDate.getDate()) }.${ addZero(newDate.getMonth() + 1) } ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
+	return fullDay
+		? `${ addZero(newDate.getDate()) }.${ addZero(newDate.getMonth() + 1) }`
+		: `${ addZero(newDate.getDate()) }.${ addZero(newDate.getMonth() + 1) } ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 };
 
 const Calendar = ({ size }: { size: number }) => {
@@ -51,7 +60,7 @@ const Calendar = ({ size }: { size: number }) => {
 								</Grid>
 								<Grid item xs={ 2.5 }>
 									<Typography variant={ "h6" } component={ "span" }>
-										{ formatDate(event.start) }
+										{ formatDate(event.start, event.startAllDay) }
 									</Typography>
 								</Grid>
 								<Grid item xs={ 9 }>

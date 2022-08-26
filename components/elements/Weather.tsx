@@ -49,7 +49,8 @@ const Weather = ({ size }: { size: number }) => {
 		} }>
 			<Stack direction={ "column" } spacing={ 1 }>
 				<Stack direction={ "row" } spacing={ 2 } sx={ {
-					justifyContent: "space-around",
+					justifyContent: "flex-start",
+					gap: "1rem",
 				} }>
 					<Stack direction={ "row" } spacing={ 1 } sx={ {
 						alignItems: "center",

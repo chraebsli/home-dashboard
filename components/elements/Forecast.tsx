@@ -47,7 +47,10 @@ const Forecast = ({ size }: { size: number }) => {
 									<Typography variant={ "h6" } component={ "span" }>
 										{ formatDate(forecast.time) }
 									</Typography>
-									<img width={ 30 }
+									<img width={ 40 } style={ {
+										backgroundColor: "#8d8d8d",
+										borderRadius: "50%",
+									} }
 									     src={ `http://openweathermap.org/img/wn/${ forecast.weather.icon }@2x.png` }
 									     alt={ forecast.weather.description } />
 									<Typography variant={ "h6" } component={ "span" }>
