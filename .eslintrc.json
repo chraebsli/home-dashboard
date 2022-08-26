@@ -25,14 +25,15 @@
 	],
 	"rules": {
 		"quotes": [
-			"error",
+			"warn",
 			"double"
 		],
 		"semi": [
-			"error",
+			"warn",
 			"always"
 		],
-		"react/jsx-uses-react": "error",
-		"no-unused-vars": "off"
+		"react/jsx-uses-react": "warn",
+		"no-unused-vars": "off",
+		"no-mixed-spaces-and-tabs": "warn"
 	}
 }
