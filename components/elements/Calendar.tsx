@@ -5,7 +5,6 @@ import { addZero } from "@utils/functions";
 import React, { useEffect, useState } from "react";
 
 const formatDate = (date: string, fullDay = false) => {
-	console.log(fullDay);
 	const newDate = new Date(date);
 	if (newDate.toDateString() === new Date().toDateString()) {
 		return fullDay

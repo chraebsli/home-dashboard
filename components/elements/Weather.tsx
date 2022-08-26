@@ -33,7 +33,6 @@ const formatTemperature = (weather: CurrentWeatherData) => {
 
 const formatSunTime = (weather: CurrentWeatherData, time: "sunrise" | "sunset") => {
 	const date = new Date(weather[time] * 1000);
-	console.log(date);
 	return `${ addZero(date.getHours()) }:${ addZero(date.getMinutes()) }`;
 };
 
