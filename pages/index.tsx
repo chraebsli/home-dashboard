@@ -9,7 +9,7 @@ import React, { useEffect } from "react";
 const App = () => {
 	const [ apiURL, setApiURL ] = React.useState("http://localhost:3000/api");
 	useEffect(() => {
-		setApiURL(window.location.origin);
+		setApiURL(`${window.location.origin}/api`);
 	}, []);
 
 	return (

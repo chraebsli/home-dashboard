@@ -1,6 +1,6 @@
 export default function Config(){
 	return {
-		location: [
+		locations: [
 			{
 				name: "Rumisberg",
 				country: "CH",
