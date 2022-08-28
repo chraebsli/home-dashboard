@@ -49,6 +49,9 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 			<Stack direction={ "column" } spacing={ 1 }>
 				{ calendar?.map((event: CalendarEvent, index: number) => {
 					if (index < 10) {
+						event.location = event.location.replaceAll("\\", "");
+						event.description = event.description.replaceAll("\\", "");
+
 						return (
 							<Grid container key={ index } spacing={ 0 } sx={ {
 								display: "flex",
