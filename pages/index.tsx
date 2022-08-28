@@ -1,9 +1,11 @@
 import Calendar from "@components/elements/Calendar";
 import Clock from "@components/elements/Clock";
 import Forecast, { Location } from "@components/elements/Forecast";
+import Screensaver from "@components/elements/Screensaver";
 import Weather from "@components/elements/Weather";
 import Layout from "@components/Layout";
 import { Grid } from "@mui/material";
+import { solve } from "@utils/functions";
 import React, { useEffect, useState } from "react";
 
 const App = () => {
@@ -14,13 +16,31 @@ const App = () => {
 
 	const [ location, setLocation ] = useState(Location.Wiedlisbach);
 
+	const [ sleep, setSleep ] = useState(false);
+	const [ renderTime, setRenderTime ] = useState(new Date().getTime());
+	const [ currentTime, setCurrentTime ] = useState(new Date().getTime());
+	const resetSleep = () => {
+		setRenderTime(new Date().getTime());
+		setCurrentTime(new Date().getTime());
+		setSleep(false);
+	};
+
+	useEffect(() => {
+		const timeout = solve(process.env.NEXT_PUBLIC_SCREEN_TIMEOUT) || 1000 * 60 * 5;
+		const interval = setInterval(() => {
+			setCurrentTime(new Date().getTime());
+			currentTime - renderTime > timeout ? setSleep(true) : null;
+		}, 1000);
+		return () => clearInterval(interval);
+	}, [ renderTime, currentTime ]);
+
 	return (
 		<Layout>
-			<Grid container direction={ "column" } sx={ {
+			<Grid container direction={ "column" } onClick={ () => resetSleep() } sx={ {
+				display: sleep ? "none" : "flex",
 				backgroundColor: "background.default",
 				padding: "1rem",
-			} }
-			>
+			} }>
 				<Grid container item xs={ 2 }>
 					<Clock size={ 2 } />
 					<Grid item xs={ 8 } className="news"></Grid>
@@ -35,6 +55,7 @@ const App = () => {
 					<Grid item xs={ 12 } className="action"></Grid>
 				</Grid>
 			</Grid>
+			<Screensaver sleep={ sleep } resetSleep={ resetSleep } />
 		</Layout>
 	);
 };

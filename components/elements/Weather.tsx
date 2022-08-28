@@ -39,7 +39,6 @@ const formatSunTime = (weather: CurrentWeatherData, time: "sunrise" | "sunset") 
 
 const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, location: Location }) => {
 	const [ weather, setWeather ] = useState(null);
-	const [ currentWeather, setCurrentWeather ] = useState(null);
 	const [ loading, setLoading ] = useState(true);
 
 	const getData = () => {
@@ -47,7 +46,6 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 			.then(res => res.json() as Promise<CurrentWeatherData>)
 			.then(data => {
 				data[0].temperature ? setWeather(data) : null;
-				data[0].temperature ? setCurrentWeather(data[location]) : null;
 				setLoading(false);
 			});
 	};
@@ -58,12 +56,6 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 			getData();
 		}, 1000 * 60 * 60);
 	}, []);
-
-	//useEffect(() => {
-	//	setInterval(() => {
-	//		setLocation(location === Location.Wiedlisbach ? Location.Bern : Location.Wiedlisbach);
-	//	}, 1000 * 5);
-	//});
 
 	return !loading ? (
 		<Grid item xs={ size } className="weather item" sx={ {
@@ -102,8 +94,9 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 					<Typography variant="h6" component="span" sx={ { color: "text.secondary" } }>
 						{ formatDirection(weather[location]?.wind?.direction) }
 					</Typography>
-					<Typography variant="h6"
-					            component="span">{ round(weather[location]?.wind?.speed, 0) } km/h</Typography>
+					<Typography variant="h6" component="span">
+						{ round(weather[location]?.wind?.speed, 0) } km/h
+					</Typography>
 				</Stack>
 			</Stack>
 		</Grid>
