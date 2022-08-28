@@ -6,7 +6,11 @@ import React, { useEffect, useState } from "react";
 
 const formatDate = (date: string, fullDay = false) => {
 	const newDate = new Date(date);
-	if (newDate.toDateString() === new Date().toDateString()) {
+	const now = new Date();
+
+	if (newDate.getTime() < now.getTime()) {
+		return "Now";
+	} else if (newDate.toDateString() === new Date().toDateString()) {
 		return fullDay
 			? "Today"
 			: `Today, ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
@@ -60,12 +64,12 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 								<Grid item xs={ .5 }>
 									<CalendarIcon calendar={ event.calendar } />
 								</Grid>
-								<Grid item xs={ 2.5 }>
+								<Grid item xs={ 3 }>
 									<Typography variant={ "h6" } component={ "span" }>
 										{ formatDate(event.start, event.startAllDay) }
 									</Typography>
 								</Grid>
-								<Grid item xs={ 9 }>
+								<Grid item xs={ 8.5 }>
 									<Typography variant={ "h6" } component={ "span" }>{ event.summary }</Typography>
 								</Grid>
 								<Grid item xs={ .5 }></Grid>

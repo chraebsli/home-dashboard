@@ -1,5 +1,3 @@
-import { DateTimeObject } from "ical-js-parser";
-
 export type CurrentWeatherData = OWMCurrentWeatherData | AWCurrentWeatherData;
 export type ForecastWeatherData = OWMForecastWeatherData;
 
@@ -83,6 +81,6 @@ export type CalendarEvent = {
 	created: string,
 	modified: string,
 	id: string,
-	rule: string,
-	exdates: DateTimeObject[]
+	rules: { until?: string, freq?: string, interval?: string, count?: string, days?: string[] },
+	excluded: string[]
 }
