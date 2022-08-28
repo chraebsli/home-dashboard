@@ -1,3 +1,4 @@
+import { Location } from "@components/elements/Forecast";
 import { CurrentWeatherData } from "@interfaces/index";
 import { Grid, Stack, Typography } from "@mui/material";
 import { addZero, round } from "@utils/functions";
@@ -36,14 +37,18 @@ const formatSunTime = (weather: CurrentWeatherData, time: "sunrise" | "sunset") 
 	return `${ addZero(date.getHours()) }:${ addZero(date.getMinutes()) }`;
 };
 
-const Weather = ({ size, apiURL }: { size: number, apiURL: string }) => {
+const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, location: Location }) => {
 	const [ weather, setWeather ] = useState(null);
+	const [ currentWeather, setCurrentWeather ] = useState(null);
+	const [ loading, setLoading ] = useState(true);
 
 	const getData = () => {
 		fetch(`${ apiURL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/current`)
 			.then(res => res.json() as Promise<CurrentWeatherData>)
 			.then(data => {
-				data.temperature ? setWeather(data) : null;
+				data[0].temperature ? setWeather(data) : null;
+				data[0].temperature ? setCurrentWeather(data[location]) : null;
+				setLoading(false);
 			});
 	};
 
@@ -54,7 +59,13 @@ const Weather = ({ size, apiURL }: { size: number, apiURL: string }) => {
 		}, 1000 * 60 * 60);
 	}, []);
 
-	return (
+	//useEffect(() => {
+	//	setInterval(() => {
+	//		setLocation(location === Location.Wiedlisbach ? Location.Bern : Location.Wiedlisbach);
+	//	}, 1000 * 5);
+	//});
+
+	return !loading ? (
 		<Grid item xs={ size } className="weather item" sx={ {
 			padding: "1rem",
 		} }>
@@ -68,7 +79,7 @@ const Weather = ({ size, apiURL }: { size: number, apiURL: string }) => {
 					} }>
 						<img width={ 30 } src={ "/i/sunrise.png" } alt={ "sunrise icon" } />
 						<Typography variant="h6" component="span">
-							{ weather ? formatSunTime(weather, "sunrise") : null }
+							{ weather[location] ? formatSunTime(weather[location], "sunrise") : null }
 						</Typography>
 					</Stack>
 					<Stack direction={ "row" } spacing={ 1 } sx={ {
@@ -76,26 +87,27 @@ const Weather = ({ size, apiURL }: { size: number, apiURL: string }) => {
 					} }>
 						<img width={ 30 } src={ "/i/sunset.png" } alt={ "sunset icon" } />
 						<Typography variant="h6" component="span">
-							{ weather ? formatSunTime(weather, "sunset") : null }
+							{ weather[location] ? formatSunTime(weather[location], "sunset") : null }
 						</Typography>
 					</Stack>
 				</Stack>
 				<Stack direction={ "row" } spacing={ 1 }>
 					<img width={ 30 } src={ "/i/temperature.svg" } alt={ "temperature icon" } />
 					<Typography variant="h4" component="span">
-						{ weather ? formatTemperature(weather) : null }
+						{ weather[location] ? formatTemperature(weather[location]) : null }
 					</Typography>
 				</Stack>
 				<Stack direction={ "row" } spacing={ 1 }>
 					<img width={ 30 } src={ "/i/wind.svg" } alt={ "wind icon" } />
 					<Typography variant="h6" component="span" sx={ { color: "text.secondary" } }>
-						{ formatDirection(weather?.wind?.direction) }
+						{ formatDirection(weather[location]?.wind?.direction) }
 					</Typography>
-					<Typography variant="h6" component="span">{ round(weather?.wind?.speed, 0) } km/h</Typography>
+					<Typography variant="h6"
+					            component="span">{ round(weather[location]?.wind?.speed, 0) } km/h</Typography>
 				</Stack>
 			</Stack>
 		</Grid>
-	);
+	) : null;
 };
 
 export default Weather;

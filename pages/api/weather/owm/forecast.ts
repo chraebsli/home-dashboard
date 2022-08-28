@@ -35,7 +35,7 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 				})
 				.then(data => response.push(data));
 		} else {
-			response.push(forecastTestWeatherData());
+			response.push(forecastTestWeatherData()[location.id]);
 		}
 	}
 	res.status(200).json(response);

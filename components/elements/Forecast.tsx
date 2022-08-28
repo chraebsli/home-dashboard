@@ -3,7 +3,7 @@ import { Box, Divider, Grid, Stack, Tab, Tabs, Typography } from "@mui/material"
 import { addZero, round, toFloat } from "@utils/functions";
 import React, { useEffect, useState } from "react";
 
-enum Location {
+export enum Location {
 	Wiedlisbach = 0,
 	Bern = 1,
 }
@@ -11,7 +11,7 @@ enum Location {
 interface TabPanelProps {
 	children?: React.ReactNode;
 	index: number;
-	value: number;
+	value: Location | React.Dispatch<React.SetStateAction<Location>>;
 }
 
 const formatDate = (date: number) => {
@@ -41,21 +41,24 @@ function TabPanel(props: TabPanelProps){
 	);
 }
 
-const Forecast = ({ size, apiURL }: { size: number, apiURL: string }) => {
+const Forecast = ({
+	size, apiURL, location, setLocation,
+}: { size: number, apiURL: string, location: Location, setLocation: React.Dispatch<React.SetStateAction<Location>> }) => {
 	const [ weather, setWeather ] = useState(null);
-	const [ currentWeather, setCurrentWeather ] = useState(null);
-	const [ location, setLocation ] = useState(Location.Wiedlisbach);
+	const [ loading, setLoading ] = useState(true);
 
 	const getData = () => {
 		fetch(`${ apiURL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/forecast`)
 			.then(res => res.json() as Promise<ForecastWeatherData>)
 			.then(data => {
 				data[0].forecasts ? setWeather(data) : null;
-				data[0].forecasts ? setCurrentWeather(data[location]) : null;
+				setLoading(false);
 			});
 	};
 
 	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
 		setLocation(newValue);
 	};
 
@@ -64,9 +67,9 @@ const Forecast = ({ size, apiURL }: { size: number, apiURL: string }) => {
 		setInterval(() => {
 			getData();
 		}, 1000 * 60 * 60);
-	}, [ weather, currentWeather, location ]);
+	}, []);
 
-	return (
+	return !loading ? (
 		<Grid item xs={ size } className="forecast item" sx={ {
 			padding: "1rem",
 		} }>
@@ -95,7 +98,7 @@ const Forecast = ({ size, apiURL }: { size: number, apiURL: string }) => {
 				</Box>
 			</Stack>
 		</Grid>
-	);
+	) : null;
 };
 
 const ForecastList = ({ weather }: { weather: ForecastWeatherData }) => {
