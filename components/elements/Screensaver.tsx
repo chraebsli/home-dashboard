@@ -3,6 +3,20 @@ import { Box, Stack, Typography } from "@mui/material";
 import { addZero } from "@utils/functions";
 import React, { useEffect, useState } from "react";
 
+const requestWakeLock = async () => {
+	try {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-ignore
+		const wakeLock = await navigator.wakeLock.request("screen");
+		wakeLock.addEventListener("release", () => {
+			console.log("Wake Lock was released");
+		});
+		console.log("Wake Lock is active");
+	} catch (err) {
+		console.error(`${ err.name }, ${ err.message }`);
+	}
+};
+
 const Screensaver = ({
 	sleep, resetSleep,
 }: { sleep: boolean, resetSleep }) => {
@@ -16,6 +30,7 @@ const Screensaver = ({
 		setInterval(() => {
 			setDate(new Date());
 		}, 1000);
+		requestWakeLock();
 	}, []);
 
 	return sleep ? (
