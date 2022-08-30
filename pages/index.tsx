@@ -1,6 +1,6 @@
 import Calendar from "@components/elements/Calendar";
 import Clock from "@components/elements/Clock";
-import Forecast, { Location } from "@components/elements/Forecast";
+import Forecast, { FType, Location } from "@components/elements/Forecast";
 import Screensaver from "@components/elements/Screensaver";
 import Weather from "@components/elements/Weather";
 import Layout from "@components/Layout";
@@ -15,6 +15,7 @@ const App = () => {
 	}, []);
 
 	const [ location, setLocation ] = useState(Location.Wiedlisbach);
+	const [ fType, setFType ] = useState(FType.hourly);
 
 	const [ sleep, setSleep ] = useState(false);
 	const [ renderTime, setRenderTime ] = useState(new Date().getTime());
@@ -49,7 +50,7 @@ const App = () => {
 				<Grid container item xs={ 8 }>
 					<Calendar size={ 5 } apiURL={ apiURL } />
 					<Grid item xs={ 5 } className="main"></Grid>
-					<Forecast size={ 2 } apiURL={ apiURL } location={ location } setLocation={ setLocation } />
+					<Forecast size={ 2 } apiURL={ apiURL } location={ location } setLocation={ setLocation } fType={fType} setFType={setFType} />
 				</Grid>
 				<Grid container item xs={ 2 }>
 					<Grid item xs={ 12 } className="action"></Grid>

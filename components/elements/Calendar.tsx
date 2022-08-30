@@ -1,5 +1,5 @@
 import CalendarIcon from "@components/CalendarIcon";
-import { CalendarEvent } from "@interfaces/index";
+import { CalendarEvent } from "@interfaces/calendar";
 import { Grid, Stack, Typography } from "@mui/material";
 import { addZero } from "@utils/functions";
 import React, { useEffect, useState } from "react";

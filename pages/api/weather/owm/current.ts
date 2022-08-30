@@ -1,4 +1,4 @@
-import { CurrentWeatherData } from "@interfaces/index";
+import { CurrentWeatherData } from "@interfaces/weather";
 import Config from "@pages/api/weather/owm/config";
 import { currentTestWeatherData } from "@utils/OWMTestWeatherData";
 import { NextApiRequest, NextApiResponse } from "next";

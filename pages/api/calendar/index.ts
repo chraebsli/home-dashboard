@@ -1,4 +1,4 @@
-import { CalendarEvent } from "@interfaces/index";
+import { CalendarEvent } from "@interfaces/calendar";
 import ICalParser from "ical-js-parser";
 import { NextApiRequest, NextApiResponse } from "next";
 

@@ -1,5 +1,5 @@
 import { Location } from "@components/elements/Forecast";
-import { CurrentWeatherData } from "@interfaces/index";
+import { CurrentWeatherData } from "@interfaces/weather";
 import { Grid, Stack, Typography } from "@mui/material";
 import { addZero, round } from "@utils/functions";
 import React, { useEffect, useState } from "react";
