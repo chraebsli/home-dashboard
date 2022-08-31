@@ -47,12 +47,15 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 	}, []);
 
 	return (
-		<Grid item xs={ size } className="weather item" sx={ {
+		<Grid item xs={ size } className="calendar item" sx={ {
 			padding: "1rem",
 		} }>
-			<Stack direction={ "column" } spacing={ 1 }>
+			<Stack direction={ "column" } spacing={ 1 } sx={ {
+				maxHeight: "50%",
+				maxWidth: "80%",
+			} }>
 				{ calendar?.map((event: CalendarEvent, index: number) => {
-					if (index < 10) {
+					if (index < 20) {
 						event.location = event.location.replaceAll("\\", "");
 						event.description = event.description.replaceAll("\\", "");
 
@@ -61,19 +64,19 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 								display: "flex",
 								alignItems: "flex-start",
 							} }>
-								<Grid item xs={ .5 }>
+								<Grid item xs={.6 }>
 									<CalendarIcon calendar={ event.calendar } />
 								</Grid>
-								<Grid item xs={ 3 }>
+								<Grid item xs={ 3.5 }>
 									<Typography variant={ "h6" } component={ "span" }>
 										{ formatDate(event.start, event.startAllDay) }
 									</Typography>
 								</Grid>
-								<Grid item xs={ 8.5 }>
+								<Grid item xs={ 7.9 }>
 									<Typography variant={ "h6" } component={ "span" }>{ event.summary }</Typography>
 								</Grid>
-								<Grid item xs={ .5 }></Grid>
-								<Grid item xs={ 11.5 } sx={ {
+								<Grid item xs={ .6 }></Grid>
+								<Grid item xs={ 11.4 } sx={ {
 									marginTop: "-.5rem",
 								} }>
 									<Typography variant={ "h6" } component={ "span" } sx={ {
