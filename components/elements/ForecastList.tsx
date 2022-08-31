@@ -31,9 +31,13 @@ const ForecastList = ({
 };
 
 const HourlyForecastList = ({ hourlyWeather }: { hourlyWeather: HourlyForecast }) => {
-	return (<Stack direction={ "column" } spacing={ 1 }>
+	return (
+		<Stack className={ "forecast-list" } direction={ "column" } spacing={ 1 }
+			sx={ {
+				maxHeight: "30rem",
+			} }>
 			{ hourlyWeather?.forecasts.map((forecast: HourlyForecastData, index) => {
-				return index < 12
+				return index < 20
 					? (
 						<Box key={ index } sx={ {
 							display: "flex",
@@ -64,9 +68,9 @@ const HourlyForecastList = ({ hourlyWeather }: { hourlyWeather: HourlyForecast }
 
 const DailyForecastList = ({ dailyWeather }: { dailyWeather: DailyForecast }) => {
 	return (
-		<Stack direction={ "column" } spacing={ 1 }>
+		<Stack className={ "calendar-list" } direction={ "column" } spacing={ 1 }>
 			{ dailyWeather.forecasts.map((forecast: DailyForecastData, index) => {
-				return index < 5
+				return index < 10
 					? (
 						<Box key={ index } sx={ {
 							display: "flex",
