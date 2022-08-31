@@ -35,7 +35,11 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 						.sort((a, b) =>
 							new Date(a[0].date).getTime() - new Date(b[0].date).getTime())
 						.map(day => {
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+							// @ts-ignore
 							const min = Math.min(...day.map(d => d.temp.min));
+							// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+							// @ts-ignore
 							const max = Math.max(...day.map(d => d.temp.max));
 							const weather = day[0].weather;
 							dayArr.push({
