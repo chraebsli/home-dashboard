@@ -41,7 +41,7 @@ const Clock = ({ size }: { size: number }) => {
 					</Stack>
 					<Stack direction={ "row" } spacing={ 0.5 }>
 						<Typography variant={ "h5" } component={ "span" }>{ `${ time.getDate() }. ${
-							Month[time.getMonth()]
+							Month[time.getMonth() + 1]
 						} ${ time.getFullYear() }` }</Typography>
 					</Stack>
 					<Stack direction={ "row" }>
