@@ -26,6 +26,8 @@ const App = () => {
 		setSleep(false);
 	};
 
+	useEffect(() => { window.onmousemove = () => { resetSleep(); }; });
+
 	useEffect(() => {
 		const timeout = solve(process.env.NEXT_PUBLIC_SCREEN_TIMEOUT) || 1000 * 60 * 5;
 		const interval = setInterval(() => {
