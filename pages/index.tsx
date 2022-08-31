@@ -40,7 +40,7 @@ const App = () => {
 			<Grid container direction={ "column" } onClick={ () => resetSleep() } sx={ {
 				display: sleep ? "none" : "flex",
 				backgroundColor: "background.default",
-				padding: "1rem",
+				padding: "3rem",
 			} }>
 				<Grid container item xs={ 2 }>
 					<Clock size={ 2 } />
