@@ -1,6 +1,6 @@
 import { DailyForecast } from "@interfaces/weather";
 import Config from "@pages/api/weather/owm/config";
-import { forecastTestWeatherData } from "@utils/OWMTestWeatherData";
+import { forecastTestDailyWeatherData } from "@utils/OWMTestWeatherData";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const C = Config();
@@ -42,12 +42,13 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 								date: day[0].date,
 								location: day[0].location,
 								temp: { min, max },
-								weather,
+								weather: weather,
 							});
 						});
+					dayArr.flat();
 				});
 		} else {
-			dayArr.push(forecastTestWeatherData()[location.id]);
+			dayArr.push(forecastTestDailyWeatherData()[location.id]);
 		}
 		response.push({ location: dayArr[0].location, forecasts: dayArr });
 	}

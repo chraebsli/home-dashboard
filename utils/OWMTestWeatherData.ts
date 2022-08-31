@@ -56,6 +56,28 @@ export const forecastTestWeatherData = () => {
 	} ];
 };
 
+export const forecastTestDailyWeatherData = () => {
+	return [ {
+		code: "200",
+		message: 0,
+		forecasts: generateDailyTestWeatherForecastData(0),
+		city: {
+			name: "Wiedlisbach",
+		},
+		service: "openweathermap",
+		cached: false,
+	}, {
+		code: "200",
+		message: 0,
+		forecasts: generateDailyTestWeatherForecastData(1),
+		city: {
+			name: "Bern",
+		},
+		service: "openweathermap",
+		cached: false,
+	} ];
+};
+
 const generateTestWeatherForecastData = (seed: number) => {
 	const forecasts = [];
 	for (let i = 0; i < 40; i++) {
@@ -75,6 +97,31 @@ const generateTestWeatherForecastData = (seed: number) => {
 			wind: {
 				speed: randomFromRange(0, 20) + seed * 3,
 				direction: randomFromRange(0, 360) + seed * 3,
+			},
+		});
+	}
+	return forecasts;
+};
+
+const generateDailyTestWeatherForecastData = (seed: number) => {
+	const forecasts = [];
+	for (let i = 0; i < 5; i++) {
+		const r = randomFromArray(weatherData);
+		forecasts.push({
+			time: 1661245200 + i * 24 * 1000,
+			temperature: {
+				real: 29.54767453531278 + seed * 3,
+				feel: 19.913093375903543 + seed * 3,
+			},
+			weather: {
+				id: 800,
+				main: r.main,
+				description: r.description,
+				icon: r.icon,
+			},
+			wind: {
+				speed: 11.367378250447885 + seed * 3,
+				direction: 89.94763744188525 + seed * 3,
 			},
 		});
 	}

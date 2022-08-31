@@ -66,7 +66,7 @@ const DailyForecastList = ({ dailyWeather }: { dailyWeather: DailyForecast }) =>
 	return (
 		<Stack direction={ "column" } spacing={ 1 }>
 			{ dailyWeather.forecasts.map((forecast: DailyForecastData, index) => {
-				return index < 12
+				return index < 5
 					? (
 						<Box key={ index } sx={ {
 							display: "flex",
