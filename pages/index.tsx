@@ -1,3 +1,4 @@
+import Action from "@components/elements/Action";
 import Calendar from "@components/elements/Calendar";
 import Clock from "@components/elements/Clock";
 import Forecast, { FType, Location } from "@components/elements/Forecast";
@@ -57,6 +58,7 @@ const App = () => {
 				<Grid container item xs={ 2 }>
 					<Grid item xs={ 12 } className="action"></Grid>
 				</Grid>
+				<Action sleep={sleep} setSleep={ setSleep}/>
 			</Grid>
 			<Screensaver sleep={ sleep } resetSleep={ resetSleep } />
 		</Layout>
