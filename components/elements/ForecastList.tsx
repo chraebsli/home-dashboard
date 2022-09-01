@@ -1,8 +1,8 @@
+import React from "react";
+import { Box, Divider, Stack, Typography } from "@mui/material";
 import { FType, Location } from "@components/elements/Forecast";
 import { DailyForecast, DailyForecastData, HourlyForecast, HourlyForecastData } from "@interfaces/weather";
-import { Box, Divider, Stack, Typography } from "@mui/material";
 import { addZero, round, toFloat } from "@utils/functions";
-import React from "react";
 
 const formatTime = (date: number) => {
 	const newDate = new Date(date * 1000);
@@ -32,25 +32,25 @@ const ForecastList = ({
 
 const HourlyForecastList = ({ hourlyWeather }: { hourlyWeather: HourlyForecast }) => {
 	return (
-		<Stack className={ "forecast-list" } direction={ "column" } spacing={ 1 }
+		<Stack
+			className={ "forecast-list" }
+			direction={ "column" }
+			spacing={ 1 }
 			sx={ {
 				maxHeight: "30rem",
 			} }>
 			{ hourlyWeather?.forecasts.map((forecast: HourlyForecastData, index) => {
 				return index < 20
 					? (
-						<Box key={ index } sx={ {
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "space-between",
-						} }>
+						<Box
+							key={ index }
+							sx={ { display: "flex", alignItems: "center", justifyContent: "space-between" } }>
 							<Typography variant={ "h6" } component={ "span" }>
 								{ formatTime(forecast.time) }
 							</Typography>
-							<img width={ 40 } style={ {
-								backgroundColor: "#b4b4b4",
-								borderRadius: "50%",
-							} }
+							<img
+								width={ 40 }
+								style={ { backgroundColor: "#b4b4b4", borderRadius: "50%" } }
 								src={ `http://openweathermap.org/img/wn/${ forecast.weather.icon }@2x.png` }
 								alt={ forecast.weather.description } />
 							<Typography variant={ "h6" } component={ "span" }>
@@ -72,18 +72,15 @@ const DailyForecastList = ({ dailyWeather }: { dailyWeather: DailyForecast }) =>
 			{ dailyWeather.forecasts.map((forecast: DailyForecastData, index) => {
 				return index < 10
 					? (
-						<Box key={ index } sx={ {
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "space-between",
-						} }>
+						<Box
+							key={ index }
+							sx={ { display: "flex", alignItems: "center", justifyContent: "space-between" } }>
 							<Typography variant={ "h6" } component={ "span" }>
 								{ formatDate(forecast.date) }
 							</Typography>
-							<img width={ 40 } style={ {
-								backgroundColor: "#b4b4b4",
-								borderRadius: "50%",
-							} }
+							<img
+								width={ 40 }
+								style={ { backgroundColor: "#b4b4b4", borderRadius: "50%" } }
 								src={ `http://openweathermap.org/img/wn/${ forecast.weather.icon }@2x.png` }
 								alt={ forecast.weather.description } />
 							<Typography variant={ "h6" } component={ "span" }>

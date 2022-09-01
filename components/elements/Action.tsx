@@ -1,8 +1,8 @@
+import React from "react";
+import { SpeedDial, SpeedDialAction } from "@mui/material";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import ReplayIcon from "@mui/icons-material/Replay";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-import { SpeedDial, SpeedDialAction } from "@mui/material";
-import React from "react";
 
 const Action = ({ sleep, setSleep }: { sleep: boolean, setSleep }) => {
 	const [ open, setOpen ] = React.useState(false);

@@ -1,7 +1,7 @@
+import React from "react";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 import EventIcon from "@mui/icons-material/Event";
 import ForestIcon from "@mui/icons-material/Forest";
-import React from "react";
 
 const config = [
 	{ name: "Home Nicholas", icon: <EventIcon sx={ { color: "#4285f4" } } /> },

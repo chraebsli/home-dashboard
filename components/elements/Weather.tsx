@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from "react";
+import { Grid, Stack, Typography } from "@mui/material";
 import { Location } from "@components/elements/Forecast";
 import { CurrentWeatherData } from "@interfaces/weather";
-import { Grid, Stack, Typography } from "@mui/material";
 import { addZero, round, solve } from "@utils/functions";
-import React, { useEffect, useState } from "react";
 
 const formatDirection = (deg: number) => {
 	if (deg > 337.5) return "N";
@@ -37,6 +37,9 @@ const formatSunTime = (weather: CurrentWeatherData, time: "sunrise" | "sunset") 
 	return `${ addZero(date.getHours()) }:${ addZero(date.getMinutes()) }`;
 };
 
+const calculateRainfall = (weather: CurrentWeatherData): number => weather.rain.lastHour + weather.rain.last3Hours;
+const calculateSnowfall = (weather: CurrentWeatherData): number => weather.snow.lastHour + weather.snow.last3Hours;
+
 const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, location: Location }) => {
 	const [ weather, setWeather ] = useState(null);
 	const [ loading, setLoading ] = useState(true);
@@ -59,25 +62,16 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 	}, []);
 
 	return !loading ? (
-		<Grid item xs={ size } className="weather item" sx={ {
-			padding: "1rem",
-		} }>
+		<Grid item xs={ size } className="weather item" sx={ { padding: "1rem" } }>
 			<Stack direction={ "column" } spacing={ 1 }>
-				<Stack direction={ "row" } spacing={ 2 } sx={ {
-					justifyContent: "flex-start",
-					gap: "1rem",
-				} }>
-					<Stack direction={ "row" } spacing={ 1 } sx={ {
-						alignItems: "center",
-					} }>
+				<Stack direction={ "row" } spacing={ 2 } sx={ { justifyContent: "flex-start", gap: "1rem" } }>
+					<Stack direction={ "row" } spacing={ 1 } sx={ { alignItems: "center" } }>
 						<img width={ 30 } src={ "/i/sunrise.png" } alt={ "sunrise icon" } />
 						<Typography variant="h6" component="span">
 							{ weather[location] ? formatSunTime(weather[location], "sunrise") : null }
 						</Typography>
 					</Stack>
-					<Stack direction={ "row" } spacing={ 1 } sx={ {
-						alignItems: "center",
-					} }>
+					<Stack direction={ "row" } spacing={ 1 } sx={ { alignItems: "center" } }>
 						<img width={ 30 } src={ "/i/sunset.png" } alt={ "sunset icon" } />
 						<Typography variant="h6" component="span">
 							{ weather[location] ? formatSunTime(weather[location], "sunset") : null }
@@ -126,8 +120,5 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 		</Grid>
 	) : null;
 };
-
-const calculateRainfall = (weather: CurrentWeatherData): number => weather.rain.lastHour + weather.rain.last3Hours;
-const calculateSnowfall = (weather: CurrentWeatherData): number => weather.snow.lastHour + weather.snow.last3Hours;
 
 export default Weather;

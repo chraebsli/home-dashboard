@@ -1,8 +1,8 @@
-import CalendarIcon from "@components/CalendarIcon";
-import { CalendarEvent } from "@interfaces/calendar";
-import { Grid, Stack, Typography } from "@mui/material";
-import { addZero, solve } from "@utils/functions";
 import React, { useEffect, useState } from "react";
+import { Grid, Stack, Typography } from "@mui/material";
+import CalendarIcon from "@components/CalendarIcon";
+import { addZero, solve } from "@utils/functions";
+import { CalendarEvent } from "@interfaces/calendar";
 
 const formatDate = (date: string, fullDay = false) => {
 	const newDate = new Date(date);
@@ -48,13 +48,8 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 	}, []);
 
 	return (
-		<Grid item xs={ size } className="calendar item" sx={ {
-			padding: "1rem",
-		} }>
-			<Stack direction={ "column" } spacing={ 1 } sx={ {
-				maxHeight: "50%",
-				maxWidth: "70%",
-			} }>
+		<Grid item xs={ size } sx={ { padding: "1rem" } } className={ "calendar" }>
+			<Stack direction={ "column" } spacing={ 1 } sx={ { maxHeight: "50%", maxWidth: "70%" } }>
 				{ calendar?.map((event: CalendarEvent, index: number) => {
 					if (index < 20) {
 						event.location = event.location.replaceAll("\\", "");
@@ -83,11 +78,9 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 									textOverflow: "ellipsis",
 									overflowX: "hidden",
 								} }>
-									<Typography variant={ "h6" } component={ "span" } sx={ {
-										whiteSpace: "nowrap",
-									} }>
-										{ event.location ?
-											`${ event.location }, ${ event.description }`
+									<Typography variant={ "h6" } component={ "span" } sx={ { whiteSpace: "nowrap" } }>
+										{ event.location
+											? `${ event.location }, ${ event.description }`
 											: event.description
 										}
 									</Typography>

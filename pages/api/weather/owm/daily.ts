@@ -1,7 +1,7 @@
-import { DailyForecast, DailyForecastData } from "@interfaces/weather";
-import Config from "@pages/api/weather/owm/config";
-import { dailyForecastTestWeatherData } from "@utils/TestWeatherData";
 import { NextApiRequest, NextApiResponse } from "next";
+import Config from "./config";
+import { DailyForecast, DailyForecastData } from "@interfaces/weather";
+import { dailyForecastTestWeatherData } from "@utils/TestWeatherData";
 
 const C = Config();
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {

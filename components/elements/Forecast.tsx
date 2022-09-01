@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from "react";
+import { Divider, Grid, Stack } from "@mui/material";
 import ForecastControl from "@components/elements/ForecastControl";
 import ForecastList from "@components/elements/ForecastList";
 import { DailyForecast, HourlyForecast } from "@interfaces/weather";
-import { Divider, Grid, Stack } from "@mui/material";
 import { solve } from "@utils/functions";
-import React, { useEffect, useState } from "react";
 
 export enum Location {
 	Wiedlisbach = 0,
@@ -61,10 +61,16 @@ const Forecast = ({
 			padding: "1rem",
 		} }>
 			<Stack direction={ "column" } spacing={ 1 }>
-				<ForecastControl location={ location } setLocation={ setLocation } fType={ fType }
+				<ForecastControl
+					location={ location }
+					setLocation={ setLocation }
+					fType={ fType }
 					setFType={ setFType } />
 				<Divider />
-				<ForecastList hourlyWeather={ hourlyWeather } dailyWeather={ dailyWeather } location={ location }
+				<ForecastList
+					hourlyWeather={ hourlyWeather }
+					dailyWeather={ dailyWeather }
+					location={ location }
 					fType={ fType } />
 			</Stack>
 		</Grid>

@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
 import Action from "@components/elements/Action";
 import Calendar from "@components/elements/Calendar";
 import Clock from "@components/elements/Clock";
@@ -5,9 +7,7 @@ import Forecast, { FType, Location } from "@components/elements/Forecast";
 import Screensaver from "@components/elements/Screensaver";
 import Weather from "@components/elements/Weather";
 import Layout from "@components/Layout";
-import { Grid } from "@mui/material";
 import { solve } from "@utils/functions";
-import React, { useEffect, useState } from "react";
 
 const App = () => {
 	const [ apiURL, setApiURL ] = React.useState("http://localhost:3000/api");
@@ -53,12 +53,18 @@ const App = () => {
 				<Grid container item xs={ 8 }>
 					<Calendar size={ 5 } apiURL={ apiURL } />
 					<Grid item xs={ 5 } className="main"></Grid>
-					<Forecast size={ 2 } apiURL={ apiURL } location={ location } setLocation={ setLocation } fType={fType} setFType={setFType} />
+					<Forecast
+						size={ 2 }
+						apiURL={ apiURL }
+						location={ location }
+						setLocation={ setLocation }
+						fType={ fType }
+						setFType={ setFType } />
 				</Grid>
 				<Grid container item xs={ 2 }>
 					<Grid item xs={ 12 } className="action"></Grid>
 				</Grid>
-				<Action sleep={sleep} setSleep={ setSleep}/>
+				<Action sleep={ sleep } setSleep={ setSleep } />
 			</Grid>
 			<Screensaver sleep={ sleep } resetSleep={ resetSleep } />
 		</Layout>

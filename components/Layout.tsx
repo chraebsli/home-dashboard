@@ -1,9 +1,10 @@
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import React, { ReactNode } from "react";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 const defaultTheme = createTheme({
 	palette: {
 		primary: { main: "#ffffff" },
+		secondary: { main: "#575757" },
 		text: {
 			primary: "#ffffff",
 			secondary: "#ffffff80",

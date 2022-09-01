@@ -1,6 +1,6 @@
-import { FType, Location } from "@components/elements/Forecast";
-import { Box, Tab, Tabs } from "@mui/material";
 import React from "react";
+import { Box, Tab, Tabs } from "@mui/material";
+import { FType, Location } from "@components/elements/Forecast";
 
 function a11yProps(index: number){
 	return { id: `simple-tab-${ index }`, "aria-controls": `simple-tabpanel-${ index }` };
