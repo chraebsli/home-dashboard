@@ -1,7 +1,7 @@
 import CalendarIcon from "@components/CalendarIcon";
 import { CalendarEvent } from "@interfaces/calendar";
 import { Grid, Stack, Typography } from "@mui/material";
-import { addZero } from "@utils/functions";
+import { addZero, solve } from "@utils/functions";
 import React, { useEffect, useState } from "react";
 
 const formatDate = (date: string, fullDay = false) => {
@@ -32,6 +32,7 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 	const [ calendar, setCalendar ] = useState(null);
 
 	const getData = () => {
+		console.log("Getting calendar data...");
 		fetch(`${ apiURL }/calendar/`)
 			.then(res => res.json() as Promise<CalendarEvent[]>)
 			.then(data => {
@@ -43,7 +44,7 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 		getData();
 		setInterval(() => {
 			getData();
-		}, 1000 * 30);
+		}, solve(process.env.NEXT_PUBLIC_CALENDAR_REFRESH));
 	}, []);
 
 	return (

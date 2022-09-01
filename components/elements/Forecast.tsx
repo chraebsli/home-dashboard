@@ -1,7 +1,8 @@
 import ForecastControl from "@components/elements/ForecastControl";
 import ForecastList from "@components/elements/ForecastList";
 import { DailyForecast, HourlyForecast } from "@interfaces/weather";
-import { Box, Divider, Grid, Stack } from "@mui/material";
+import { Divider, Grid, Stack } from "@mui/material";
+import { solve } from "@utils/functions";
 import React, { useEffect, useState } from "react";
 
 export enum Location {
@@ -27,6 +28,7 @@ const Forecast = ({
 	const [ dailyLoading, setDailyLoading ] = useState(true);
 
 	const getHourlyForecastData = () => {
+		console.log("Getting hourly forecast data...");
 		fetch(`${ apiURL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/forecast`)
 			.then(res => res.json() as Promise<HourlyForecast>)
 			.then(data => {
@@ -36,6 +38,7 @@ const Forecast = ({
 	};
 
 	const getDailyForecastData = () => {
+		console.log("Getting daily forecast data...");
 		fetch(`${ apiURL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/daily`)
 			.then(res => res.json() as Promise<DailyForecast[]>)
 			.then(data => {
@@ -50,7 +53,7 @@ const Forecast = ({
 		setInterval(() => {
 			getHourlyForecastData();
 			getDailyForecastData();
-		}, 1000 * 60 * 60);
+		}, solve(process.env.NEXT_PUBLIC_FORECAST_REFRESH));
 	}, []);
 
 	return !loading && !dailyLoading ? (
@@ -59,12 +62,10 @@ const Forecast = ({
 		} }>
 			<Stack direction={ "column" } spacing={ 1 }>
 				<ForecastControl location={ location } setLocation={ setLocation } fType={ fType }
-				                 setFType={ setFType } />
+					setFType={ setFType } />
 				<Divider />
-				<Box marginTop="1rem">
-					<ForecastList hourlyWeather={ hourlyWeather } dailyWeather={ dailyWeather } location={ location }
-					              fType={ fType } />
-				</Box>
+				<ForecastList hourlyWeather={ hourlyWeather } dailyWeather={ dailyWeather } location={ location }
+					fType={ fType } />
 			</Stack>
 		</Grid>
 

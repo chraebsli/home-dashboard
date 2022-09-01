@@ -1,7 +1,7 @@
 import { Location } from "@components/elements/Forecast";
 import { CurrentWeatherData } from "@interfaces/weather";
 import { Grid, Stack, Typography } from "@mui/material";
-import { addZero, round } from "@utils/functions";
+import { addZero, round, solve } from "@utils/functions";
 import React, { useEffect, useState } from "react";
 
 const formatDirection = (deg: number) => {
@@ -42,6 +42,7 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 	const [ loading, setLoading ] = useState(true);
 
 	const getData = () => {
+		console.log("Getting current weather data...");
 		fetch(`${ apiURL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/current`)
 			.then(res => res.json() as Promise<CurrentWeatherData>)
 			.then(data => {
@@ -54,7 +55,7 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 		getData();
 		setInterval(() => {
 			getData();
-		}, 1000 * 60 * 60);
+		}, solve(process.env.NEXT_PUBLIC_WEATHER_REFRESH));
 	}, []);
 
 	return !loading ? (
