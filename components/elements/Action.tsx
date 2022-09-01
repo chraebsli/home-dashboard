@@ -1,5 +1,5 @@
 import React from "react";
-import { SpeedDial, SpeedDialAction } from "@mui/material";
+import { SpeedDial, SpeedDialAction, Stack } from "@mui/material";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import ReplayIcon from "@mui/icons-material/Replay";
 import WidgetsIcon from "@mui/icons-material/Widgets";
@@ -22,25 +22,34 @@ const Action = ({ sleep, setSleep }: { sleep: boolean, setSleep }) => {
 	];
 
 	return !sleep ? (
-		<SpeedDial
-			ariaLabel="SpeedDial controlled open example"
-			icon={ <WidgetsIcon /> }
-			onClick={ handleOpen }
-			onClose={ handleClose }
-			onOpen={ handleOpen }
-			open={ open }
-			sx={ { position: "absolute", bottom: "1rem", right: "50vw" } }
-			direction={ "up" }
+		<Stack
+			direction="row"
+			sx={ {
+				position: "absolute", bottom: "2rem", left: "1rem", right: "1rem", width: "calc(100% - 2rem)",
+				justifyContent: "center",
+			} }
 		>
-			{ actions.map(action => (
-				<SpeedDialAction
-					key={ action.name }
-					icon={ action.icon }
-					tooltipTitle={ action.name }
-					onClick={ action.action }
-				/>
-			)) }
-		</SpeedDial>
+			<SpeedDial
+				ariaLabel="SpeedDial controlled open example"
+				icon={ <WidgetsIcon /> }
+				onClick={ handleOpen }
+				onClose={ handleClose }
+				onOpen={ handleOpen }
+				open={ open }
+				direction={ "up" }
+				FabProps={ { size: "large" } }
+			>
+				{ actions.map(action => (
+					<SpeedDialAction
+						key={ action.name }
+						icon={ action.icon }
+						tooltipTitle={ action.name }
+						onClick={ action.action }
+						FabProps={ { size: "large" } }
+					/>
+				)) }
+			</SpeedDial>
+		</Stack>
 	) : null;
 };
 
