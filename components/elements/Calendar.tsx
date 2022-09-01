@@ -52,7 +52,7 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 		} }>
 			<Stack direction={ "column" } spacing={ 1 } sx={ {
 				maxHeight: "50%",
-				maxWidth: "80%",
+				maxWidth: "70%",
 			} }>
 				{ calendar?.map((event: CalendarEvent, index: number) => {
 					if (index < 20) {
@@ -64,23 +64,26 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 								display: "flex",
 								alignItems: "flex-start",
 							} }>
-								<Grid item xs={.6 }>
+								<Grid item xs={ .8 }>
 									<CalendarIcon calendar={ event.calendar } />
 								</Grid>
-								<Grid item xs={ 3.5 }>
+								<Grid item xs={ 4.2 }>
 									<Typography variant={ "h6" } component={ "span" }>
 										{ formatDate(event.start, event.startAllDay) }
 									</Typography>
 								</Grid>
-								<Grid item xs={ 7.9 }>
+								<Grid item xs={ 7 }>
 									<Typography variant={ "h6" } component={ "span" }>{ event.summary }</Typography>
 								</Grid>
-								<Grid item xs={ .6 }></Grid>
-								<Grid item xs={ 11.4 } sx={ {
+								<Grid item xs={ .8 }></Grid>
+								<Grid item xs={ 11.2 } sx={ {
+									color: "text.secondary",
 									marginTop: "-.5rem",
+									textOverflow: "ellipsis",
+									overflowX: "hidden",
 								} }>
 									<Typography variant={ "h6" } component={ "span" } sx={ {
-										color: "text.secondary",
+										whiteSpace: "nowrap",
 									} }>
 										{ event.location ?
 											`${ event.location }, ${ event.description }`
