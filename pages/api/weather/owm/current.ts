@@ -1,6 +1,6 @@
 import { CurrentWeatherData } from "@interfaces/weather";
 import Config from "@pages/api/weather/owm/config";
-import { currentTestWeatherData } from "@utils/OWMTestWeatherData";
+import { currentTestWeatherData } from "@utils/TestWeatherData";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const C = Config();
@@ -24,6 +24,14 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 						wind: {
 							direction: data.wind.deg,
 							speed: data.wind.speed,
+						},
+						rain: {
+							lastHour: data.rain ? data.rain["1h"] : 0,
+							last3Hours: data.rain ? data.rain["3h"] : 0,
+						},
+						snow: {
+							lastHour: data.snow ? data.snow["1h"] : 0,
+							last3Hours: data.snow ? data.snow["3h"] : 0,
 						},
 						sunrise: data.sys.sunrise,
 						sunset: data.sys.sunset,

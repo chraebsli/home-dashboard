@@ -89,18 +89,44 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 						{ weather[location] ? formatTemperature(weather[location]) : null }
 					</Typography>
 				</Stack>
-				<Stack direction={ "row" } spacing={ 1 }>
-					<img width={ 30 } src={ "/i/wind.svg" } alt={ "wind icon" } />
-					<Typography variant="h6" component="span" sx={ { color: "text.secondary" } }>
-						{ formatDirection(weather[location]?.wind?.direction) }
-					</Typography>
-					<Typography variant="h6" component="span">
-						{ round(weather[location]?.wind?.speed, 0) } km/h
-					</Typography>
+				<Stack direction={ "row" } spacing={ 2 }>
+					<Stack direction={ "row" } spacing={ 1 }>
+						<img width={ 30 } src={ "/i/wind.svg" } alt={ "wind icon" } />
+						<Typography variant="h6" component="span" sx={ { color: "text.secondary" } }>
+							{ formatDirection(weather[location].wind.direction) }
+						</Typography>
+						<Typography variant="h6" component="span">
+							{ round(weather[location].wind.speed, 0) } km/h
+						</Typography>
+					</Stack>
+					<Stack direction={ "row" } spacing={ 1 }>
+						{
+							calculateSnowfall(weather[location]) > calculateRainfall(weather[location])
+								? (
+									<>
+										<img width={ 30 } src={ "/i/snow.svg" } alt={ "snow icon" } />
+										<Typography variant="h6" component="span">
+											{ round(calculateSnowfall(weather[location]), 0) } mm
+										</Typography>
+									</>
+								)
+								: (
+									<>
+										<img width={ 30 } src={ "/i/rain.svg" } alt={ "rain icon" } />
+										<Typography variant="h6" component="span">
+											{ round(calculateRainfall(weather[location]), 0) } mm
+										</Typography>
+									</>
+								)
+						}
+					</Stack>
 				</Stack>
 			</Stack>
 		</Grid>
 	) : null;
 };
+
+const calculateRainfall = (weather: CurrentWeatherData): number => weather.rain.lastHour + weather.rain.last3Hours;
+const calculateSnowfall = (weather: CurrentWeatherData): number => weather.snow.lastHour + weather.snow.last3Hours;
 
 export default Weather;

@@ -11,32 +11,15 @@ export type CurrentWeatherData = {
 		direction: number,
 		speed: number
 	},
+	rain: { lastHour: number, last3Hours: number }
+	snow: { lastHour: number, last3Hours: number }
 	sunrise: number,
 	sunset: number,
 }
 
-export type DailyForecast = {
-	location: string,
-	forecasts: DailyForecastData[]
-}
-
 export type HourlyForecast = {
-	forecasts: HourlyForecastData[],
 	location: string,
-}
-
-export type DailyForecastData = {
-	date: string;
-	temp: {
-		min: number;
-		max: number;
-	},
-	weather: {
-		id: number;
-		main: string;
-		description: string;
-		icon: string;
-	}
+	forecasts: HourlyForecastData[],
 }
 
 export type HourlyForecastData = {
@@ -55,5 +38,24 @@ export type HourlyForecastData = {
 		speed: number,
 		direction: number,
 	},
+}
+
+export type DailyForecast = {
+	location: string,
+	forecasts: DailyForecastData[]
+}
+
+export type DailyForecastData = {
+	date: string;
+	temp: {
+		min: number;
+		max: number;
+	},
+	weather: {
+		id: number;
+		main: string;
+		description: string;
+		icon: string;
+	}
 }
 

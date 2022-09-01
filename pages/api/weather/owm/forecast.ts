@@ -1,6 +1,6 @@
 import { HourlyForecast } from "@interfaces/weather";
 import Config from "@pages/api/weather/owm/config";
-import { hourlyForecastTestWeatherData } from "@utils/OWMTestWeatherData";
+import { hourlyForecastTestWeatherData } from "@utils/TestWeatherData";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const C = Config();

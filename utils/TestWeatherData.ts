@@ -21,6 +21,8 @@ export const currentTestWeatherData = (): CurrentWeatherData[] => {
 			direction: 50,
 			speed: 2.06,
 		},
+		rain: { lastHour: 3, last3Hours: 1 },
+		snow: { lastHour: 2, last3Hours: 4 },
 		sunrise: 1661229387,
 		sunset: 1661279291,
 	}, {
@@ -36,6 +38,8 @@ export const currentTestWeatherData = (): CurrentWeatherData[] => {
 			direction: 180,
 			speed: 8.03,
 		},
+		rain: { lastHour: 2, last3Hours: 0 },
+		snow: { lastHour: 0, last3Hours: 0 },
 		sunrise: 1661229387,
 		sunset: 1661279291,
 	} ];

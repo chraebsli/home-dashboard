@@ -1,4 +1,4 @@
-import { currentTestWeatherData } from "@utils/OWMTestWeatherData";
+import { currentTestWeatherData } from "@utils/TestWeatherData";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const apiKey = process.env.OWM_API_KEY;
