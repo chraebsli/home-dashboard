@@ -9,7 +9,7 @@ const Action = ({ sleep, setSleep }: { sleep: boolean, setSleep }) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	const reload = () => window.location.reload();
+	const fabReload = () => window.location.reload();
 	const fabSetSleep = () => {
 		setTimeout(() => {
 			setSleep(!sleep);
@@ -17,8 +17,8 @@ const Action = ({ sleep, setSleep }: { sleep: boolean, setSleep }) => {
 	};
 
 	const actions = [
-		{ name: "reload", action: reload, icon: <ReplayIcon color={ "disabled" } /> },
-		{ name: "sleep", action: fabSetSleep, icon: <NightsStayIcon color={ "disabled" } /> },
+		{ name: "reload", action: fabReload, icon: <ReplayIcon /> },
+		{ name: "sleep", action: fabSetSleep, icon: <NightsStayIcon /> },
 	];
 
 	return !sleep ? (
@@ -37,7 +37,7 @@ const Action = ({ sleep, setSleep }: { sleep: boolean, setSleep }) => {
 				onOpen={ handleOpen }
 				open={ open }
 				direction={ "up" }
-				FabProps={ { size: "large" } }
+				FabProps={ { size: "large", color: "secondary", sx: { color: "text.secondary" } } }
 			>
 				{ actions.map(action => (
 					<SpeedDialAction
@@ -45,7 +45,7 @@ const Action = ({ sleep, setSleep }: { sleep: boolean, setSleep }) => {
 						icon={ action.icon }
 						tooltipTitle={ action.name }
 						onClick={ action.action }
-						FabProps={ { size: "large" } }
+						FabProps={ { size: "large", color: "secondary", sx: { backgroundColor: "#000000" } } }
 					/>
 				)) }
 			</SpeedDial>
