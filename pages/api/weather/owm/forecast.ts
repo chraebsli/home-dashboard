@@ -1,5 +1,6 @@
+import { HourlyForecast } from "@interfaces/weather";
 import Config from "@pages/api/weather/owm/config";
-import { forecastTestWeatherData } from "@utils/OWMTestWeatherData";
+import { hourlyForecastTestWeatherData } from "@utils/OWMTestWeatherData";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const C = Config();
@@ -12,8 +13,6 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 				.then(data => data.json())
 				.then(data => {
 					return {
-						code: data.cod,
-						message: data.message,
 						forecasts: data.list.map(forecast => {
 							return {
 								time: forecast.dt,
@@ -28,14 +27,12 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 								},
 							};
 						}),
-						city: { name: data.city.name },
-						service: "openweathermap",
-						cached: false,
-					};
+						location: data.city.name,
+					} as HourlyForecast;
 				})
 				.then(data => response.push(data));
 		} else {
-			response.push(forecastTestWeatherData()[location.id]);
+			response.push(hourlyForecastTestWeatherData()[location.id]);
 		}
 	}
 	res.status(200).json(response);

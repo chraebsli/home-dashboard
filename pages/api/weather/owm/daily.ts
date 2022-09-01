@@ -1,13 +1,13 @@
-import { DailyForecast } from "@interfaces/weather";
+import { DailyForecast, DailyForecastData } from "@interfaces/weather";
 import Config from "@pages/api/weather/owm/config";
-import { forecastTestDailyWeatherData } from "@utils/OWMTestWeatherData";
+import { dailyForecastTestWeatherData } from "@utils/OWMTestWeatherData";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const C = Config();
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 	const response = [];
 	for (const location of C.locations) {
-		const dayArr = [];
+		const dayArr: DailyForecastData[] = [];
 		const requestURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${ location.lat }&lon=${ location.lon }&units=metric&appid=${ C.apiKey }`;
 		if (!process.env.NEXT_PUBLIC_API_TEST) {
 			await fetch(requestURL)
@@ -44,17 +44,16 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 							const weather = day[0].weather;
 							dayArr.push({
 								date: day[0].date,
-								location: day[0].location,
 								temp: { min, max },
 								weather: weather,
-							});
+							} as DailyForecastData);
 						});
 					dayArr.flat();
 				});
+			response.push({ location: location.name, forecasts: dayArr });
 		} else {
-			dayArr.push(forecastTestDailyWeatherData()[location.id]);
+			response.push(dailyForecastTestWeatherData()[location.id]);
 		}
-		response.push({ location: dayArr[0].location, forecasts: dayArr });
 	}
 	res.status(200).json(response);
 };

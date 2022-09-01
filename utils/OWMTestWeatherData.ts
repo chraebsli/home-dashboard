@@ -1,9 +1,18 @@
+import {
+	CurrentWeatherData,
+	DailyForecast,
+	DailyForecastData,
+	HourlyForecast,
+	HourlyForecastData,
+} from "@interfaces/weather";
 import { randomFromArray, randomFromRange } from "@utils/functions";
 
-export const currentTestWeatherData = () => {
+export const currentTestWeatherData = (): CurrentWeatherData[] => {
 	return [ {
-		description: "Clear",
-		icon: "01d",
+		weather: {
+			description: "Clear",
+			icon: "01d",
+		},
 		temperature: {
 			real: 23.73,
 			feel: 24.47,
@@ -14,11 +23,11 @@ export const currentTestWeatherData = () => {
 		},
 		sunrise: 1661229387,
 		sunset: 1661279291,
-		service: "openweathermap",
-		cached: false,
 	}, {
-		description: "Rain",
-		icon: "10d",
+		weather: {
+			description: "Rain",
+			icon: "10d",
+		},
 		temperature: {
 			real: 15.73,
 			feel: 15.47,
@@ -29,56 +38,20 @@ export const currentTestWeatherData = () => {
 		},
 		sunrise: 1661229387,
 		sunset: 1661279291,
-		service: "openweathermap",
-		cached: false,
 	} ];
 };
 
-export const forecastTestWeatherData = () => {
+export const hourlyForecastTestWeatherData = (): HourlyForecast[] => {
 	return [ {
-		code: "200",
-		message: 0,
-		forecasts: generateTestWeatherForecastData(0),
-		city: {
-			name: "Wiedlisbach",
-		},
-		service: "openweathermap",
-		cached: false,
+		forecasts: generateHourlyForecastTestWeatherData(0),
+		location: "Wiedlisbach",
 	}, {
-		code: "200",
-		message: 0,
-		forecasts: generateTestWeatherForecastData(1),
-		city: {
-			name: "Bern",
-		},
-		service: "openweathermap",
-		cached: false,
+		forecasts: generateHourlyForecastTestWeatherData(1),
+		location: "Bern",
 	} ];
 };
 
-export const forecastTestDailyWeatherData = () => {
-	return [ {
-		code: "200",
-		message: 0,
-		forecasts: generateDailyTestWeatherForecastData(0),
-		city: {
-			name: "Wiedlisbach",
-		},
-		service: "openweathermap",
-		cached: false,
-	}, {
-		code: "200",
-		message: 0,
-		forecasts: generateDailyTestWeatherForecastData(1),
-		city: {
-			name: "Bern",
-		},
-		service: "openweathermap",
-		cached: false,
-	} ];
-};
-
-const generateTestWeatherForecastData = (seed: number) => {
+const generateHourlyForecastTestWeatherData = (seed: number): HourlyForecastData[] => {
 	const forecasts = [];
 	for (let i = 0; i < 40; i++) {
 		const r = randomFromArray(weatherData);
@@ -103,25 +76,31 @@ const generateTestWeatherForecastData = (seed: number) => {
 	return forecasts;
 };
 
-const generateDailyTestWeatherForecastData = (seed: number) => {
+export const dailyForecastTestWeatherData = (): DailyForecast[] => {
+	return [ {
+		location: "Wiedlisbach",
+		forecasts: generateDailyForecastTestWeatherData(0),
+	}, {
+		location: "Bern",
+		forecasts: generateDailyForecastTestWeatherData(1),
+	} ];
+};
+
+const generateDailyForecastTestWeatherData = (seed: number): DailyForecastData[] => {
 	const forecasts = [];
 	for (let i = 0; i < 5; i++) {
 		const r = randomFromArray(weatherData);
 		forecasts.push({
-			time: 1661245200 + i * 24 * 1000,
-			temperature: {
-				real: 29.54767453531278 + seed * 3,
-				feel: 19.913093375903543 + seed * 3,
+			date: addToDate(new Date(), i * 24 * 1000),
+			temp: {
+				min: randomFromRange(10, 20) + seed * 3,
+				max: randomFromRange(20, 30) + seed * 3,
 			},
 			weather: {
 				id: 800,
 				main: r.main,
 				description: r.description,
 				icon: r.icon,
-			},
-			wind: {
-				speed: 11.367378250447885 + seed * 3,
-				direction: 89.94763744188525 + seed * 3,
 			},
 		});
 	}
@@ -137,3 +116,5 @@ const weatherData = [
 	{ main: "Snow", description: "light snow", icon: "13d" },
 	{ main: "Mist", description: "mist", icon: "50d" },
 ];
+
+const addToDate = (date: Date, hours: number): string => new Date(date.getTime() + hours).toISOString();

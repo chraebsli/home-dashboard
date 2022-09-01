@@ -13,8 +13,10 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 				.then(data => data.json())
 				.then(data => {
 					return {
-						description: data.weather[0].main,
-						icon: data.weather[0].icon,
+						weather: {
+							description: data.weather[0].main,
+							icon: data.weather[0].icon,
+						},
 						temperature: {
 							real: data.main.temp,
 							feel: data.main.feels_like,
@@ -25,10 +27,6 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 						},
 						sunrise: data.sys.sunrise,
 						sunset: data.sys.sunset,
-
-						service: "openweathermap",
-						cached: false,
-
 					} as CurrentWeatherData;
 				})
 				.then(data => response.push(data));

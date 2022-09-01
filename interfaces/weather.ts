@@ -1,6 +1,8 @@
 export type CurrentWeatherData = {
-	description: string,
-	icon: string,
+	weather: {
+		description: string,
+		icon: string,
+	}
 	temperature: {
 		real: number,
 		feel: number
@@ -11,8 +13,6 @@ export type CurrentWeatherData = {
 	},
 	sunrise: number,
 	sunset: number,
-	service: "openweathermap",
-	cached: boolean
 }
 
 export type DailyForecast = {
@@ -21,14 +21,8 @@ export type DailyForecast = {
 }
 
 export type HourlyForecast = {
-	code: string,
-	message: number | string,
 	forecasts: HourlyForecastData[],
-	city: {
-		name: string,
-	},
-	service: "openweathermap",
-	cached: boolean
+	location: string,
 }
 
 export type DailyForecastData = {
