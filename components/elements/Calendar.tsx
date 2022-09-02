@@ -13,19 +13,19 @@ const formatDate = (date: string, fullDay = false) => {
 	} else if (newDate.toDateString() === new Date().toDateString()) {
 		return fullDay
 			? "Today"
-			: `Today, ${ addZero(newDate.getHours() - 2) }:${ addZero(newDate.getMinutes()) }`;
+			: `Today, ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 	} else if (newDate.toDateString() === new Date(new Date().setDate(new Date().getDate() + 1)).toDateString()) {
 		return fullDay
 			? "Tomorrow"
-			: `Tomorrow, ${ addZero(newDate.getHours() - 2) }:${ addZero(newDate.getMinutes()) }`;
+			: `Tomorrow, ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 	} else if (newDate.getFullYear() === new Date().getFullYear() && newDate.getMonth() === new Date().getMonth() && newDate.getDate() >= new Date().getDate() && newDate.getDate() <= new Date().getDate() + 7) {
 		return fullDay
 			? `${ newDate.toLocaleString("en-us", { weekday: "long" }) }`
-			: `${ newDate.toLocaleString("en-us", { weekday: "long" }) }, ${ addZero(newDate.getHours() - 2) }:${ addZero(newDate.getMinutes()) }`;
+			: `${ newDate.toLocaleString("en-us", { weekday: "long" }) }, ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 	}
 	return fullDay
 		? `${ addZero(newDate.getDate()) }.${ addZero(newDate.getMonth() + 1) }`
-		: `${ addZero(newDate.getDate()) }.${ addZero(newDate.getMonth() + 1) } ${ addZero(newDate.getHours() - 2) }:${ addZero(newDate.getMinutes()) }`;
+		: `${ addZero(newDate.getDate()) }.${ addZero(newDate.getMonth() + 1) } ${ addZero(newDate.getHours()) }:${ addZero(newDate.getMinutes()) }`;
 };
 
 const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {

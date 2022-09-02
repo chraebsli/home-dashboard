@@ -15,8 +15,8 @@ const Clock = ({ size }: { size: number }) => {
 
 		useEffect(() => {
 			const interval = setInterval(() => { setTime(new Date()); }, 1000);
-			clearInterval(interval);
-		}, []);
+			return () => { clearInterval(interval); };
+		}, [ time ]);
 
 		return (
 			<Grid item xs={ size } className="clock item" sx={ { padding: "1rem" } }>

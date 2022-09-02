@@ -9,8 +9,12 @@ const Action = ({ sleep, setSleep }: { sleep: boolean, setSleep }) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	const fabReload = () => window.location.reload();
+	const fabReload = () => {
+		handleClose();
+		window.location.reload();
+	};
 	const fabSetSleep = () => {
+		handleClose();
 		setTimeout(() => {
 			setSleep(!sleep);
 		}, 500);
