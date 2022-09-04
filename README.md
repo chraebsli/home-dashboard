@@ -1,5 +1,12 @@
 # Home Dashboard
 
+<p>
+  <a href="https://choosealicense.com/licenses/mit">
+    <img alt="GitHub" src="https://img.shields.io/github/license/chraebslii/home-dashboard?color=blue&style=flat-square">
+  </a>
+  <img alt="Snyk Vulnerabilities for GitHub Repo" src="https://img.shields.io/snyk/vulnerabilities/github/chraebslii/home-dashboard?color=blue&style=flat-square">
+</p>
+
 _in development_  
 Dashboard to display calendar with events, weather and more for your smart home. You can add your own configuration for calendars and weather.
 
