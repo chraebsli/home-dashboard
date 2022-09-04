@@ -1,47 +1,81 @@
-# TypeScript Next.js example
+# Home Dashboard
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+_in development_  
+Dashboard to display calendar with events, weather and more for your smart home. You can add your own configuration for calendars and weather.
 
-## Deploy your own
+## Table of Contents
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-typescript)
+- [Table of Contents](#table-of-contents)
+- [Features](#features)
+- [Installation](#installation)
+    - [Requirements](#requirements)
+    - [Setup](#setup)
+- [Configuration](#configuration)
+    - [Calendar](#calendar)
+    - [Weather](#weather)
+    - [Other](#other)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+## Features
 
-## How to use it?
+- Calendar with events
+- Weather daily and hourly forecast and current weather
+- Clock with date
+- Screen saver with time and date
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+### In development
 
-```bash
-npx create-next-app --example with-typescript with-typescript-app
+- Screen saver with next event
+- Localisation options
+- More weather sources
+
+## Installation
+
+### Requirements
+
+- Node.js LTS
+- npm
+
+### Setup
+
+1. Clone the repository
+2. Install dependencies with `npm install`
+3. Get a free API key at [openweathermap.org](https://home.openweathermap.org/api_keys)
+4. Create a `.env.local` file in the root of the project and add the following variable with your API key:
+
+```dotenv
+OWM_API_KEY=your_open_weather_map_api_key
 ```
 
-```bash
-yarn create next-app --example with-typescript with-typescript-app
-```
+5. Run `npm run dev` to start the development server or `npm run build` to build the project and `npm run start` to start the production server
+6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result
 
-```bash
-pnpm create next-app --example with-typescript with-typescript-app
-```
+## Configuration
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+You can configure the dashboard by editing the files in the `/config` folder.
 
-## Notes
+### Calendar
 
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
+To add a calendar you need to add a new object to the `calendar.tsx` with the following properties:  
+`url` is the url to the calendar file (iCal format).  
+`name` is the name of the calendar.  
+`icon` is the [mui](https://mui.com/material-ui/material-icons/) icon to display for the calendar. The default is this: `<EventIcon sx={ { color: "#ffffff" } } />`, but you can use any icon from the mui library by adding it at the top of the file and change the color to anything you want
 
-```
-npm install --save-dev typescript
-```
+### Weather
 
-To enable TypeScript's features, we install the type declarations for React and Node.
+To add a weather location you need to add a new object to the `locations.ts` with the following properties:  
+`id` is the id of the location.  
+`name` is the name of the location.  
+`state` is the state of the location.  
+`country` is the country of the location.  
+`lat` is the latitude of the location.  
+`lon` is the longitude of the location.
 
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
+Both, `lat` and `lon`, you can get from [openweathermap.org](https://openweathermap.org/find) by searching for your location.
 
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
+### Other
 
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
+You can change the refresh interval for the weather and calendar in the `config.ts` file by changing the properties in `appConfig.intervals`. The values are in ms.
 
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+You can change the screen saver timeout in the `config.ts` file by changing the property in `appConfig.screenTimeout`. The value is in ms.
+
+On both you can use math expressions like `1 * 60 * 1000` for 1 minute.

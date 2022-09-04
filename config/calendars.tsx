@@ -1,5 +1,7 @@
-import NightlightIcon from "@mui/icons-material/Nightlight";
-import { CalendarConfig } from "config/config";
+import { CalendarConfig } from "@interfaces/config";
+import EventIcon from "@mui/icons-material/Event";
+import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import ForestIcon from "@mui/icons-material/Forest";
 
 export const Calendars: CalendarConfig[] = [
 	{
