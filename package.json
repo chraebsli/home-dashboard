@@ -1,10 +1,9 @@
 {
-
 	"author": "Nicholas Krebs contact@nicholas-krebs.ch https://www.nicholas-krebs.ch",
 	"version": "0.1.0",
 	"private": true,
 	"name": "home-dashboard",
-	"description": "A dashboard for my home to display information and control devices",
+	"description": "Dashboard to display calendar with events, weather and more.",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/chraebslii/home-dashboard.git"
@@ -42,3 +41,4 @@
 		"typescript-eslint": "^0.0.1-alpha.0"
 	}
 }
+

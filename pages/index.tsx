@@ -7,7 +7,7 @@ import Forecast, { FType, Location } from "@components/elements/Forecast";
 import Screensaver from "@components/elements/Screensaver";
 import Weather from "@components/elements/Weather";
 import Layout from "@components/Layout";
-import { solve } from "@utils/functions";
+import { appConfig } from "config/config";
 
 const App = () => {
 	const [ apiURL, setApiURL ] = React.useState("http://localhost:3000/api");
@@ -30,7 +30,7 @@ const App = () => {
 	useEffect(() => { window.onmousemove = () => { resetSleep(); }; });
 
 	useEffect(() => {
-		const timeout = solve(process.env.NEXT_PUBLIC_SCREEN_TIMEOUT) || 1000 * 60 * 5;
+		const timeout = appConfig.screenTimeout;
 		const interval = setInterval(() => {
 			setCurrentTime(new Date().getTime());
 			currentTime - renderTime > timeout ? setSleep(true) : null;

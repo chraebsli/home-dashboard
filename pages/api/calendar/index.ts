@@ -1,28 +1,9 @@
 import { CalendarEvent } from "@interfaces/calendar";
 import ICalParser from "ical-js-parser";
 import { NextApiRequest, NextApiResponse } from "next";
+import { appConfig } from "config/config";
 
-const sources = [
-	// Privat
-	// Home Nicholas
-	"https://calendar.google.com/calendar/ical/8i9hbp7j7vuhftjinrqijpe7sg%40group.calendar.google.com/private-74c18970f44fcc538a04b77d197d871c/basic.ics",
-	// Home Mami
-	"https://calendar.google.com/calendar/ical/26impbo2lnk64u4ku0dsrm1r48%40group.calendar.google.com/private-be195c0b6e9b449a07a2fa4243888972/basic.ics",
-	// Home Alina
-	"https://calendar.google.com/calendar/ical/kj92dc7p10fn4h77lo2j64tfs4%40group.calendar.google.com/private-a6e70d0de291fc879d9746ec87f457c3/basic.ics",
-	// Home Ferien
-	"https://calendar.google.com/calendar/ical/as80u0po5i728i9nn3t3r5642o%40group.calendar.google.com/private-8965d0cb82df7f6ae9e3348f2e9eb790/basic.ics",
-
-	// Pfadi
-	// Allgemein
-	"https://calendar.google.com/calendar/ical/pfadi.bippwiedlisbach%40gmail.com/private-36e7d733fd9bdb398cc8ccb52ec50e86/basic.ics",
-	// Leiteraktivität
-	"https://calendar.google.com/calendar/ical/0daso0dl9nt41j1mcthghm5n94%40group.calendar.google.com/private-c52587967686e4837ca9242045181357/basic.ics",
-	// WS Höck
-	"https://calendar.google.com/calendar/ical/vu2v3usieuac06h4hbvgbcsck0%40group.calendar.google.com/private-93445e9c55536066e4e7a46705cc082a/basic.ics",
-	// WS QP
-	"https://calendar.google.com/calendar/ical/vne2eb6ur0s4lqdl1eooijuku0%40group.calendar.google.com/private-46027c54f71bdc064977db8ce81bfccd/basic.ics",
-];
+const sources = appConfig.calendar.calendars.map((calendar) => calendar.url);
 
 enum Day {
 	Monday = 0,
@@ -158,7 +139,6 @@ const createRepeatedEvents = (events: CalendarEvent[]): CalendarEvent[] => {
 				}
 			} else if (event.rules?.freq === "WEEKLY" && until && start < now) {
 				const diff = Math.floor((now - start) / WEEKS);
-				console.log(diff);
 				for (let i = 0; i < diff; i++) {
 					event.rules?.days.map((day) => {
 						const newEvent = { ...event };
@@ -183,7 +163,6 @@ const createRepeatedEvents = (events: CalendarEvent[]): CalendarEvent[] => {
 
 			return events.flat();
 		}).flat();
-
 };
 
 export default handler;

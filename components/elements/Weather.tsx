@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Grid, Stack, Typography } from "@mui/material";
 import { Location } from "@components/elements/Forecast";
 import { CurrentWeatherData } from "@interfaces/weather";
-import { addZero, round, solve } from "@utils/functions";
+import { addZero, round } from "@utils/functions";
+import { appConfig } from "config/config";
 
 const formatDirection = (deg: number) => {
 	if (deg > 337.5) return "N";
@@ -43,10 +44,12 @@ const calculateSnowfall = (weather: CurrentWeatherData): number => weather.snow.
 const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, location: Location }) => {
 	const [ weather, setWeather ] = useState(null);
 	const [ loading, setLoading ] = useState(true);
+	const intervals = appConfig.intervals;
+	const weatherService = appConfig.weather.weatherService;
 
 	const getData = () => {
 		console.log("Getting current weather data...");
-		fetch(`${ apiURL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/current`)
+		fetch(`${ apiURL }/weather/${ weatherService }/current`)
 			.then(res => res.json() as Promise<CurrentWeatherData>)
 			.then(data => {
 				data[0].temperature ? setWeather(data) : null;
@@ -58,7 +61,7 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 		getData();
 		setInterval(() => {
 			getData();
-		}, solve(process.env.NEXT_PUBLIC_WEATHER_REFRESH));
+		}, intervals.weather);
 	}, []);
 
 	return !loading ? (

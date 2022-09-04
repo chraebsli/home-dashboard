@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import Config from "./config";
 import { DailyForecast, DailyForecastData } from "@interfaces/weather";
 import { dailyForecastTestWeatherData } from "@utils/TestWeatherData";
+import { appConfig } from "config/config";
 
-const C = Config();
+const C = appConfig.weather.owm;
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 	const response = [];
 	for (const location of C.locations) {

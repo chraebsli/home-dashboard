@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Grid, Stack, Typography } from "@mui/material";
 import CalendarIcon from "@components/CalendarIcon";
-import { addZero, solve } from "@utils/functions";
+import { addZero } from "@utils/functions";
 import { CalendarEvent } from "@interfaces/calendar";
+import { appConfig } from "config/config";
 
 const formatDate = (date: string, fullDay = false) => {
 	const newDate = new Date(date);
@@ -30,6 +31,7 @@ const formatDate = (date: string, fullDay = false) => {
 
 const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 	const [ calendar, setCalendar ] = useState(null);
+	const intervals = appConfig.intervals;
 
 	const getData = () => {
 		console.log("Getting calendar data...");
@@ -44,16 +46,16 @@ const Calendar = ({ size, apiURL }: { size: number, apiURL: string }) => {
 		getData();
 		setInterval(() => {
 			getData();
-		}, solve(process.env.NEXT_PUBLIC_CALENDAR_REFRESH));
-	}, []);
+		}, intervals.calendar);
+	}, [ intervals ]);
 
 	return (
 		<Grid item xs={ size } sx={ { padding: "1rem" } } className={ "calendar" }>
 			<Stack direction={ "column" } spacing={ 1 } sx={ { maxHeight: "50%", maxWidth: "70%" } }>
 				{ calendar?.map((event: CalendarEvent, index: number) => {
 					if (index < 20) {
-						event.location = event.location.replaceAll("\\", "");
-						event.description = event.description.replaceAll("\\", "");
+						event.location = event.location?.replaceAll("\\", "");
+						event.description = event.description?.replaceAll("\\", "");
 
 						return (
 							<Grid container key={ index } spacing={ 0 } sx={ {

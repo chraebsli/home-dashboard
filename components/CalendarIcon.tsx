@@ -1,20 +1,17 @@
 import React from "react";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import { jsx } from "@emotion/react";
 import EventIcon from "@mui/icons-material/Event";
-import ForestIcon from "@mui/icons-material/Forest";
+import { appConfig } from "config/config";
+import JSX = jsx.JSX;
 
-const config = [
-	{ name: "Home Nicholas", icon: <EventIcon sx={ { color: "#4285f4" } } /> },
-	{ name: "Home Alina", icon: <EventIcon sx={ { color: "#f6bf26" } } /> },
-	{ name: "Home Mami", icon: <EventIcon sx={ { color: "#ef6c00" } } /> },
-	{ name: "Ferien", icon: <BeachAccessIcon sx={ { color: "#616161" } } /> },
-	{ name: "Allgemein", icon: <ForestIcon sx={ { color: "#4285f4" } } /> },
-	{ name: "Leiteraktivität", icon: <ForestIcon sx={ { color: "#4285f4" } } /> },
-	{ name: "WS Höck", icon: <ForestIcon sx={ { color: "#4285f4" } } /> },
-	{ name: "WS QP", icon: <ForestIcon sx={ { color: "#4285f4" } } /> },
-];
+const config = appConfig.calendar.calendars.map(calendar => {
+	return {
+		name: calendar.name,
+		icon: calendar.icon as JSX.Element,
+	};
+});
 
-export default function CalendarIcon({ calendar }: { calendar: string }){
-	const icon = config.find((item) => item.name === calendar)?.icon;
+export default function CalendarIcon({ calendar }: { calendar: string }): JSX.Element{
+	const icon = config.find((item) => item.name === calendar).icon;
 	return icon ? icon : <EventIcon sx={ { color: "#ffffff" } } />;
 }

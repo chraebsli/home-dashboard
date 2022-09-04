@@ -3,7 +3,7 @@ import { Divider, Grid, Stack } from "@mui/material";
 import ForecastControl from "@components/elements/ForecastControl";
 import ForecastList from "@components/elements/ForecastList";
 import { DailyForecast, HourlyForecast } from "@interfaces/weather";
-import { solve } from "@utils/functions";
+import { appConfig } from "config/config";
 
 export enum Location {
 	Wiedlisbach = 0,
@@ -26,10 +26,12 @@ const Forecast = ({
 	const [ loading, setLoading ] = useState(true);
 	const [ dailyWeather, setDailyWeather ] = useState(null);
 	const [ dailyLoading, setDailyLoading ] = useState(true);
+	const intervals = appConfig.intervals;
+	const weatherService = appConfig.weather.weatherService;
 
 	const getHourlyForecastData = () => {
 		console.log("Getting hourly forecast data...");
-		fetch(`${ apiURL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/forecast`)
+		fetch(`${ apiURL }/weather/${ weatherService }/forecast`)
 			.then(res => res.json() as Promise<HourlyForecast>)
 			.then(data => {
 				data[0].forecasts ? setHourlyWeather(data) : null;
@@ -39,7 +41,7 @@ const Forecast = ({
 
 	const getDailyForecastData = () => {
 		console.log("Getting daily forecast data...");
-		fetch(`${ apiURL }/weather/${ process.env.NEXT_PUBLIC_WEATHER_SERVICE }/daily`)
+		fetch(`${ apiURL }/weather/${ weatherService }/daily`)
 			.then(res => res.json() as Promise<DailyForecast[]>)
 			.then(data => {
 				data[0].forecasts ? setDailyWeather(data) : null;
@@ -53,7 +55,7 @@ const Forecast = ({
 		setInterval(() => {
 			getHourlyForecastData();
 			getDailyForecastData();
-		}, solve(process.env.NEXT_PUBLIC_FORECAST_REFRESH));
+		}, intervals.forecast);
 	}, []);
 
 	return !loading && !dailyLoading ? (
