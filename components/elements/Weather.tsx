@@ -64,6 +64,8 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 		}, intervals.weather);
 	}, []);
 
+	//console.log(weather[location]);
+
 	return !loading ? (
 		<Grid item xs={ size } className="weather item" sx={ { padding: "1rem" } }>
 			<Stack direction={ "column" } spacing={ 1 }>
@@ -104,7 +106,7 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 									<>
 										<img width={ 30 } src={ "/i/snow.svg" } alt={ "snow icon" } />
 										<Typography variant="h6" component="span">
-											{ round(calculateSnowfall(weather[location]), 0) } mm
+											{ Math.ceil(calculateSnowfall(weather[location])) } mm
 										</Typography>
 									</>
 								)
@@ -112,7 +114,7 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 									<>
 										<img width={ 30 } src={ "/i/rain.svg" } alt={ "rain icon" } />
 										<Typography variant="h6" component="span">
-											{ round(calculateRainfall(weather[location]), 0) } mm
+											{ Math.ceil(calculateRainfall(weather[location])) } mm
 										</Typography>
 									</>
 								)

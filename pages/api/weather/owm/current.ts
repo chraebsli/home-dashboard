@@ -26,12 +26,12 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 							speed: data.wind.speed,
 						},
 						rain: {
-							lastHour: data.rain ? data.rain["1h"] : 0,
-							last3Hours: data.rain ? data.rain["3h"] : 0,
+							lastHour: data.rain && data.rain["1h"] ? data.rain["1h"] : 0,
+							last3Hours: data.rain && data.rain["3h"] ? data.rain["3h"] : 0,
 						},
 						snow: {
-							lastHour: data.snow ? data.snow["1h"] : 0,
-							last3Hours: data.snow ? data.snow["3h"] : 0,
+							lastHour: data.snow && data.snow["1h"] ? data.snow["1h"] : 0,
+							last3Hours: data.snow && data.snow["3h"] ? data.snow["3h"] : 0,
 						},
 						sunrise: data.sys.sunrise,
 						sunset: data.sys.sunset,
