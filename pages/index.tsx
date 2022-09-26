@@ -66,7 +66,7 @@ const App = () => {
 				</Grid>
 				<Action sleep={ sleep } setSleep={ setSleep } />
 			</Grid>
-			<Screensaver sleep={ sleep } resetSleep={ resetSleep } />
+			<Screensaver sleep={ sleep } resetSleep={ resetSleep } apiURL={ apiURL } />
 		</Layout>
 	);
 };
