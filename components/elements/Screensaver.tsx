@@ -39,7 +39,7 @@ const Screensaver = ({ sleep, resetSleep, apiURL }: { sleep: boolean, resetSleep
 		requestWakeLock();
 	}, []);
 
-	return sleep && event && weather ? (
+	return sleep && weather ? (
 		<Box
 			onClick={ () => resetSleep() }
 			sx={ { position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh" } }>
@@ -58,10 +58,11 @@ const Screensaver = ({ sleep, resetSleep, apiURL }: { sleep: boolean, resetSleep
 				<Divider sx={ { width: "30%", height: ".1rem" } } color={ "grey" } />
 				<Stack direction={ "column" } sx={ { alignItems: "center" } }>
 					<Typography variant={ "h4" }>
-						{ event.time } { event.name }
+						{ event?.time } { event?.name }
+						{ !event.name ? "No events today" : "" }
 					</Typography>
 					<Typography variant={ "h5" } sx={ { color: "text.secondary" } }>
-						{ event.description || event.location }
+						{ event?.description || event?.location }
 					</Typography>
 				</Stack>
 				<Divider sx={ { width: "30%", height: ".1rem" } } color={ "grey" } />
