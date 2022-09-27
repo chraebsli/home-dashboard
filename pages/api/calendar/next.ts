@@ -17,12 +17,12 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 			const start = new Date(event.start);
 			return fullDate(start) === fullDate(new Date());
 		})[0];
-		res.status(200).json({
+		event?.summary ? res.status(200).json({
 			name: event.summary,
 			time: !event.startAllDay ? formatTime(event.start) : null,
 			description: event.description,
 			location: event.location.split("\\,")[0],
-		});
+		}) : res.status(200).json({});
 	});
 };
 

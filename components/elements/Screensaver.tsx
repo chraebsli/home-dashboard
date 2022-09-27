@@ -59,7 +59,7 @@ const Screensaver = ({ sleep, resetSleep, apiURL }: { sleep: boolean, resetSleep
 				<Stack direction={ "column" } sx={ { alignItems: "center" } }>
 					<Typography variant={ "h4" }>
 						{ event?.time } { event?.name }
-						{ !event ? "No events today" : "" }
+						{ !event.name ? "No events today" : "" }
 					</Typography>
 					<Typography variant={ "h5" } sx={ { color: "text.secondary" } }>
 						{ event?.description || event?.location }
