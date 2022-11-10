@@ -7,7 +7,7 @@ const C = appConfig.weather.owm;
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 	const response = [];
 	for (const location of C.locations) {
-		const requestURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${ location.lat }&lon=${ location.lon }&units=metric&appid=${ C.apiKey }`;
+		const requestURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${C.apiKey}`;
 		if (!process.env.NEXT_PUBLIC_API_TEST) {
 			await fetch(requestURL)
 				.then(data => data.json())

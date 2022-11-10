@@ -22,16 +22,16 @@ const Forecast = ({
 	location: Location, setLocation: React.Dispatch<React.SetStateAction<Location>>,
 	fType: FType, setFType: React.Dispatch<React.SetStateAction<FType>>,
 }) => {
-	const [ hourlyWeather, setHourlyWeather ] = useState(null);
-	const [ loading, setLoading ] = useState(true);
-	const [ dailyWeather, setDailyWeather ] = useState(null);
-	const [ dailyLoading, setDailyLoading ] = useState(true);
+	const [hourlyWeather, setHourlyWeather] = useState(null);
+	const [loading, setLoading] = useState(true);
+	const [dailyWeather, setDailyWeather] = useState(null);
+	const [dailyLoading, setDailyLoading] = useState(true);
 	const intervals = appConfig.intervals;
 	const weatherService = appConfig.weather.weatherService;
 
 	const getHourlyForecastData = () => {
 		console.log("Getting hourly forecast data...");
-		fetch(`${ apiURL }/weather/${ weatherService }/forecast`)
+		fetch(`${apiURL}/weather/${weatherService}/forecast`)
 			.then(res => res.json() as Promise<HourlyForecast>)
 			.then(data => {
 				data[0].forecasts ? setHourlyWeather(data) : null;
@@ -41,7 +41,7 @@ const Forecast = ({
 
 	const getDailyForecastData = () => {
 		console.log("Getting daily forecast data...");
-		fetch(`${ apiURL }/weather/${ weatherService }/daily`)
+		fetch(`${apiURL}/weather/${weatherService}/daily`)
 			.then(res => res.json() as Promise<DailyForecast[]>)
 			.then(data => {
 				data[0].forecasts ? setDailyWeather(data) : null;
@@ -59,21 +59,21 @@ const Forecast = ({
 	}, []);
 
 	return !loading && !dailyLoading ? (
-		<Grid item xs={ size } className="forecast item" sx={ {
+		<Grid item xs={size} className="forecast item" sx={{
 			padding: "1rem",
-		} }>
-			<Stack direction={ "column" } spacing={ 1 }>
+		}}>
+			<Stack direction={"column"} spacing={1}>
 				<ForecastControl
-					location={ location }
-					setLocation={ setLocation }
-					fType={ fType }
-					setFType={ setFType } />
+					location={location}
+					setLocation={setLocation}
+					fType={fType}
+					setFType={setFType} />
 				<Divider />
 				<ForecastList
-					hourlyWeather={ hourlyWeather }
-					dailyWeather={ dailyWeather }
-					location={ location }
-					fType={ fType } />
+					hourlyWeather={hourlyWeather}
+					dailyWeather={dailyWeather}
+					location={location}
+					fType={fType} />
 			</Stack>
 		</Grid>
 

@@ -3,8 +3,8 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 const defaultTheme = createTheme({
 	palette: {
-		primary: { main: "#ffffff" },
-		secondary: { main: "#000000" },
+		primary: {main: "#ffffff"},
+		secondary: {main: "#000000"},
 		text: {
 			primary: "#ffffff",
 			secondary: "#ffffff80",
@@ -28,12 +28,12 @@ const defaultTheme = createTheme({
 	},
 });
 
-export default function Layout({ children }: { children?: ReactNode }){
+export default function Layout({children}: {children?: ReactNode}){
 	return (
 		<>
-			<ThemeProvider theme={ defaultTheme }>
+			<ThemeProvider theme={defaultTheme}>
 				<CssBaseline />
-				{ children }
+				{children}
 			</ThemeProvider>
 		</>
 	);

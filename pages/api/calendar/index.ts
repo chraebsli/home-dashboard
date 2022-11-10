@@ -29,13 +29,13 @@ const formatDate = (date: string) => {
 	const year = date.substring(0, 4);
 	const month = date.substring(4, 6);
 	const day = date.substring(6, 8);
-	if ([ 15, 16 ].includes(date.length)) {
+	if ([15, 16].includes(date.length)) {
 		const hour = date.substring(9, 11);
 		const minute = date.substring(11, 13);
 		const second = date.substring(13, 15);
-		return `${ year }-${ month }-${ day }T${ hour }:${ minute }:${ second }Z`;
+		return `${year}-${month}-${day}T${hour}:${minute}:${second}Z`;
 	} else if (date.length === 8) {
-		return `${ year }-${ month }-${ day }T00:00:00Z`;
+		return `${year}-${month}-${day}T00:00:00Z`;
 	}
 };
 const formatISODate = (date: string) => {
@@ -45,7 +45,7 @@ const formatISODate = (date: string) => {
 	const hour = date.substring(11, 13);
 	const minute = date.substring(14, 16);
 	const second = date.substring(17, 19);
-	return `${ year }-${ month }-${ day }T${ hour }:${ minute }:${ second }Z`;
+	return `${year}-${month}-${day}T${hour}:${minute}:${second}Z`;
 };
 
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
@@ -69,14 +69,14 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 					modified: formatDate(event.lastModified?.value),
 					id: event.uid,
 					rules: event.rrule?.split(";").map((rule) => {
-						const [ key, value ] = rule.split("=");
+						const [key, value] = rule.split("=");
 						if (key == "UNTIL") {
-							return new Object({ until: formatDate(value) });
+							return new Object({until: formatDate(value)});
 						} else if (key == "BYDAY") {
-							return new Object({ days: value.toLowerCase().split(",") });
+							return new Object({days: value.toLowerCase().split(",")});
 						}
-						return new Object({ [key.toLowerCase()]: value });
-					}).reduce((a, b) => ({ ...a, ...b }), {}),
+						return new Object({[key.toLowerCase()]: value});
+					}).reduce((a, b) => ({...a, ...b}), {}),
 					excluded: event.exdate?.map((date) => formatDate(date.value)),
 					//raw: event,
 				} as CalendarEvent;
@@ -130,7 +130,7 @@ const createRepeatedEvents = (events: CalendarEvent[]): CalendarEvent[] => {
 				const diff = Math.floor((until - start) / WEEKS);
 				for (let i = 0; i < diff; i++) {
 					event.rules?.days.map((day) => {
-						const newEvent = { ...event };
+						const newEvent = {...event};
 						newEvent.start = formatISODate(new Date(start + i * WEEKS + Day2[day] * DAYS).toISOString());
 						newEvent.end = formatISODate(new Date(end + i * WEEKS + Day2[day] * DAYS).toISOString());
 
@@ -141,7 +141,7 @@ const createRepeatedEvents = (events: CalendarEvent[]): CalendarEvent[] => {
 				const diff = Math.floor((now - start) / WEEKS);
 				for (let i = 0; i < diff; i++) {
 					event.rules?.days.map((day) => {
-						const newEvent = { ...event };
+						const newEvent = {...event};
 						newEvent.start = formatISODate(new Date(start + i * WEEKS + Day2[day] * DAYS).toISOString());
 						newEvent.end = formatISODate(new Date(end + i * WEEKS + Day2[day] * DAYS).toISOString());
 
@@ -152,7 +152,7 @@ const createRepeatedEvents = (events: CalendarEvent[]): CalendarEvent[] => {
 				const oneYear = 52 * WEEKS;
 				const diff = Math.floor((oneYear + now - start) / WEEKS);
 				for (let i = 0; i < diff; i++) {
-					const newEvent = { ...event };
+					const newEvent = {...event};
 					newEvent.start = formatISODate(new Date(start + i * WEEKS).toISOString());
 					newEvent.end = formatISODate(new Date(end + i * WEEKS).toISOString());
 
