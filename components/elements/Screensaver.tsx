@@ -61,8 +61,8 @@ const Screensaver = ({ sleep, resetSleep, apiURL }: { sleep: boolean, resetSleep
 						{ event?.time } { event?.name }
 						{ !event.name ? "No events today" : "" }
 					</Typography>
-					<Typography variant={ "h5" } sx={ { color: "text.secondary" } }>
-						{ event?.description || event?.location }
+					<Typography variant={ "h5" } sx={ { color: "text.secondary", maxWidth: "40vw" } }>
+						{ event?.description.substring(0, 140) || event?.location }
 					</Typography>
 				</Stack>
 				<Divider sx={ { width: "30%", height: ".1rem" } } color={ "grey" } />
