@@ -18,16 +18,16 @@ const formatDirection = (deg: number) => {
 };
 
 const formatTemperature = (weather: CurrentWeatherData) => {
-	const { real, feel } = weather.temperature;
+	const {real, feel} = weather.temperature;
 	const feelsElement = (
-		<Typography variant="h5" component={ "span" } sx={ { color: "text.secondary" } }>
-			/{ round(feel, 1) }
+		<Typography variant="h5" component={"span"} sx={{color: "text.secondary"}}>
+			/{round(feel, 1)}
 		</Typography>
 	);
 	return (
 		<>
-			{ round(real, 1) }
-			{ feelsElement }
+			{round(real, 1)}
+			{feelsElement}
 			°C
 		</>
 	);
@@ -35,21 +35,21 @@ const formatTemperature = (weather: CurrentWeatherData) => {
 
 const formatSunTime = (weather: CurrentWeatherData, time: "sunrise" | "sunset") => {
 	const date = new Date(weather[time] * 1000);
-	return `${ addZero(date.getHours()) }:${ addZero(date.getMinutes()) }`;
+	return `${addZero(date.getHours())}:${addZero(date.getMinutes())}`;
 };
 
 const calculateRainfall = (weather: CurrentWeatherData): number => weather.rain.lastHour + weather.rain.last3Hours;
 const calculateSnowfall = (weather: CurrentWeatherData): number => weather.snow.lastHour + weather.snow.last3Hours;
 
-const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, location: Location }) => {
-	const [ weather, setWeather ] = useState(null);
-	const [ loading, setLoading ] = useState(true);
+const Weather = ({size, apiURL, location}: {size: number, apiURL: string, location: Location}) => {
+	const [weather, setWeather] = useState(null);
+	const [loading, setLoading] = useState(true);
 	const intervals = appConfig.intervals;
 	const weatherService = appConfig.weather.weatherService;
 
 	const getData = () => {
 		console.log("Getting current weather data...");
-		fetch(`${ apiURL }/weather/${ weatherService }/current`)
+		fetch(`${apiURL}/weather/${weatherService}/current`)
 			.then(res => res.json() as Promise<CurrentWeatherData>)
 			.then(data => {
 				data[0].temperature ? setWeather(data) : null;
@@ -67,54 +67,54 @@ const Weather = ({ size, apiURL, location }: { size: number, apiURL: string, loc
 	//console.log(weather[location]);
 
 	return !loading ? (
-		<Grid item xs={ size } className="weather item" sx={ { padding: "1rem" } }>
-			<Stack direction={ "column" } spacing={ 1 }>
-				<Stack direction={ "row" } spacing={ 2 } sx={ { justifyContent: "flex-start", gap: "1rem" } }>
-					<Stack direction={ "row" } spacing={ 1 } sx={ { alignItems: "center" } }>
-						<img width={ 30 } src={ "/i/sunrise.png" } alt={ "sunrise icon" } />
+		<Grid item xs={size} className="weather item" sx={{padding: "1rem"}}>
+			<Stack direction={"column"} spacing={1}>
+				<Stack direction={"row"} spacing={2} sx={{justifyContent: "flex-start", gap: "1rem"}}>
+					<Stack direction={"row"} spacing={1} sx={{alignItems: "center"}}>
+						<img width={30} src={"/i/sunrise.png"} alt={"sunrise icon"} />
 						<Typography variant="h6" component="span">
-							{ weather[location] ? formatSunTime(weather[location], "sunrise") : null }
+							{weather[location] ? formatSunTime(weather[location], "sunrise") : null}
 						</Typography>
 					</Stack>
-					<Stack direction={ "row" } spacing={ 1 } sx={ { alignItems: "center" } }>
-						<img width={ 30 } src={ "/i/sunset.png" } alt={ "sunset icon" } />
+					<Stack direction={"row"} spacing={1} sx={{alignItems: "center"}}>
+						<img width={30} src={"/i/sunset.png"} alt={"sunset icon"} />
 						<Typography variant="h6" component="span">
-							{ weather[location] ? formatSunTime(weather[location], "sunset") : null }
+							{weather[location] ? formatSunTime(weather[location], "sunset") : null}
 						</Typography>
 					</Stack>
 				</Stack>
-				<Stack direction={ "row" } spacing={ 1 }>
-					<img width={ 30 } src={ "/i/temperature.svg" } alt={ "temperature icon" } />
+				<Stack direction={"row"} spacing={1}>
+					<img width={30} src={"/i/temperature.svg"} alt={"temperature icon"} />
 					<Typography variant="h4" component="span">
-						{ weather[location] ? formatTemperature(weather[location]) : null }
+						{weather[location] ? formatTemperature(weather[location]) : null}
 					</Typography>
 				</Stack>
-				<Stack direction={ "row" } spacing={ 2 }>
-					<Stack direction={ "row" } spacing={ 1 }>
-						<img width={ 30 } src={ "/i/wind.svg" } alt={ "wind icon" } />
-						<Typography variant="h6" component="span" sx={ { color: "text.secondary" } }>
-							{ formatDirection(weather[location].wind.direction) }
+				<Stack direction={"row"} spacing={2}>
+					<Stack direction={"row"} spacing={1}>
+						<img width={30} src={"/i/wind.svg"} alt={"wind icon"} />
+						<Typography variant="h6" component="span" sx={{color: "text.secondary"}}>
+							{formatDirection(weather[location].wind.direction)}
 						</Typography>
 						<Typography variant="h6" component="span">
-							{ round(weather[location].wind.speed, 0) } km/h
+							{round(weather[location].wind.speed, 0)} km/h
 						</Typography>
 					</Stack>
-					<Stack direction={ "row" } spacing={ 1 }>
+					<Stack direction={"row"} spacing={1}>
 						{
 							calculateSnowfall(weather[location]) > calculateRainfall(weather[location])
 								? (
 									<>
-										<img width={ 30 } src={ "/i/snow.svg" } alt={ "snow icon" } />
+										<img width={30} src={"/i/snow.svg"} alt={"snow icon"} />
 										<Typography variant="h6" component="span">
-											{ Math.ceil(calculateSnowfall(weather[location])) } mm
+											{Math.ceil(calculateSnowfall(weather[location]))} mm
 										</Typography>
 									</>
 								)
 								: (
 									<>
-										<img width={ 30 } src={ "/i/rain.svg" } alt={ "rain icon" } />
+										<img width={30} src={"/i/rain.svg"} alt={"rain icon"} />
 										<Typography variant="h6" component="span">
-											{ Math.ceil(calculateRainfall(weather[location])) } mm
+											{Math.ceil(calculateRainfall(weather[location]))} mm
 										</Typography>
 									</>
 								)

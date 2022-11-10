@@ -8,7 +8,7 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 	const response = [];
 	for (const location of C.locations) {
 		const dayArr: DailyForecastData[] = [];
-		const requestURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${ location.lat }&lon=${ location.lon }&units=metric&appid=${ C.apiKey }`;
+		const requestURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&units=metric&appid=${C.apiKey}`;
 		if (!process.env.NEXT_PUBLIC_API_TEST) {
 			await fetch(requestURL)
 				.then(data => data.json())
@@ -44,13 +44,13 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 							const weather = day[0].weather;
 							dayArr.push({
 								date: day[0].date,
-								temp: { min, max },
+								temp: {min, max},
 								weather: weather,
 							} as DailyForecastData);
 						});
 					dayArr.flat();
 				});
-			response.push({ location: location.name, forecasts: dayArr });
+			response.push({location: location.name, forecasts: dayArr});
 		} else {
 			response.push(dailyForecastTestWeatherData()[location.id]);
 		}

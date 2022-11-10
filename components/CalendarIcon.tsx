@@ -11,7 +11,7 @@ const config = appConfig.calendar.calendars.map(calendar => {
 	};
 });
 
-export default function CalendarIcon({ calendar }: { calendar: string }): JSX.Element{
+export default function CalendarIcon({calendar}: {calendar: string}): JSX.Element{
 	const icon = config.find((item) => item.name === calendar).icon;
-	return icon ? icon : <EventIcon sx={ { color: "#ffffff" } } />;
+	return icon ? icon : <EventIcon sx={{color: "#ffffff"}} />;
 }

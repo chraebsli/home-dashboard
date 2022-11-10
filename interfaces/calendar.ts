@@ -11,6 +11,6 @@ export type CalendarEvent = {
 	created: string,
 	modified: string,
 	id: string,
-	rules: { until?: string, freq?: string, interval?: string, count?: string, days?: string[] },
+	rules: {until?: string, freq?: string, interval?: string, count?: string, days?: string[]},
 	excluded: string[]
 }

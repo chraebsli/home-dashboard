@@ -11,8 +11,8 @@ export type CurrentWeatherData = {
 		direction: number,
 		speed: number
 	},
-	rain: { lastHour: number, last3Hours: number }
-	snow: { lastHour: number, last3Hours: number }
+	rain: {lastHour: number, last3Hours: number}
+	snow: {lastHour: number, last3Hours: number}
 	sunrise: number,
 	sunset: number,
 }

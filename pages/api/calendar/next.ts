@@ -6,9 +6,9 @@ const formatTime = (time: string) => {
 	const date = new Date(time);
 	const hours = addZero(date.getHours());
 	const minutes = addZero(date.getMinutes());
-	return `${ hours }:${ minutes }`;
+	return `${hours}:${minutes}`;
 };
-const fullDate = (d: Date) => `${ d.getDate() }/${ d.getMonth() + 1 }/${ d.getFullYear() }`;
+const fullDate = (d: Date) => `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
 
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
 	const events = await fetch("http://localhost:3000/api/calendar");

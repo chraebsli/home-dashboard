@@ -8,7 +8,7 @@ import {
 import { randomFromArray, randomFromRange } from "@utils/functions";
 
 export const currentTestWeatherData = (): CurrentWeatherData[] => {
-	return [ {
+	return [{
 		weather: {
 			description: "Clear",
 			icon: "01d",
@@ -21,8 +21,8 @@ export const currentTestWeatherData = (): CurrentWeatherData[] => {
 			direction: 50,
 			speed: 2.06,
 		},
-		rain: { lastHour: 3, last3Hours: 1 },
-		snow: { lastHour: 2, last3Hours: 4 },
+		rain: {lastHour: 3, last3Hours: 1},
+		snow: {lastHour: 2, last3Hours: 4},
 		sunrise: 1661229387,
 		sunset: 1661279291,
 	}, {
@@ -38,21 +38,21 @@ export const currentTestWeatherData = (): CurrentWeatherData[] => {
 			direction: 180,
 			speed: 8.03,
 		},
-		rain: { lastHour: 2, last3Hours: 0 },
-		snow: { lastHour: 0, last3Hours: 0 },
+		rain: {lastHour: 2, last3Hours: 0},
+		snow: {lastHour: 0, last3Hours: 0},
 		sunrise: 1661229387,
 		sunset: 1661279291,
-	} ];
+	}];
 };
 
 export const hourlyForecastTestWeatherData = (): HourlyForecast[] => {
-	return [ {
+	return [{
 		forecasts: generateHourlyForecastTestWeatherData(0),
 		location: "Wiedlisbach",
 	}, {
 		forecasts: generateHourlyForecastTestWeatherData(1),
 		location: "Bern",
-	} ];
+	}];
 };
 
 const generateHourlyForecastTestWeatherData = (seed: number): HourlyForecastData[] => {
@@ -81,13 +81,13 @@ const generateHourlyForecastTestWeatherData = (seed: number): HourlyForecastData
 };
 
 export const dailyForecastTestWeatherData = (): DailyForecast[] => {
-	return [ {
+	return [{
 		location: "Wiedlisbach",
 		forecasts: generateDailyForecastTestWeatherData(0),
 	}, {
 		location: "Bern",
 		forecasts: generateDailyForecastTestWeatherData(1),
-	} ];
+	}];
 };
 
 const generateDailyForecastTestWeatherData = (seed: number): DailyForecastData[] => {
@@ -112,13 +112,13 @@ const generateDailyForecastTestWeatherData = (seed: number): DailyForecastData[]
 };
 
 const weatherData = [
-	{ main: "Clear", description: "clear sky", icon: "01d" },
-	{ main: "Clouds", description: "few clouds", icon: "02d" },
-	{ main: "Rain", description: "moderate rain", icon: "10d" },
-	{ main: "Drizzle", description: "drizzle", icon: "09d" },
-	{ main: "Thunderstorm", description: "thunderstorm with light rain", icon: "11d" },
-	{ main: "Snow", description: "light snow", icon: "13d" },
-	{ main: "Mist", description: "mist", icon: "50d" },
+	{main: "Clear", description: "clear sky", icon: "01d"},
+	{main: "Clouds", description: "few clouds", icon: "02d"},
+	{main: "Rain", description: "moderate rain", icon: "10d"},
+	{main: "Drizzle", description: "drizzle", icon: "09d"},
+	{main: "Thunderstorm", description: "thunderstorm with light rain", icon: "11d"},
+	{main: "Snow", description: "light snow", icon: "13d"},
+	{main: "Mist", description: "mist", icon: "50d"},
 ];
 
 const addToDate = (date: Date, hours: number): string => new Date(date.getTime() + hours).toISOString();

@@ -15,24 +15,24 @@
 		"type-check": "tsc"
 	},
 	"dependencies": {
-		"@emotion/react": "^11.10.4",
-		"@emotion/styled": "^11.10.4",
-		"@mui/icons-material": "^5.10.6",
-		"@mui/material": "^5.10.6",
+		"@emotion/react": "^11.10.5",
+		"@emotion/styled": "^11.10.5",
+		"@mui/icons-material": "^5.10.9",
+		"@mui/material": "^5.10.13",
 		"ical-js-parser": "^0.7.0",
 		"next": "latest",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"sass": "^1.55.0"
+		"sass": "^1.56.1"
 	},
 	"devDependencies": {
-		"@types/node": "^18.7.19",
-		"@types/react": "^18.0.21",
-		"@types/react-dom": "^18.0.6",
-		"@typescript-eslint/eslint-plugin": "^5.38.0",
-		"eslint": "^8.24.0",
-		"eslint-plugin-react": "^7.31.8",
-		"typescript": "^4.8.3",
+		"@types/node": "^18.11.9",
+		"@types/react": "^18.0.25",
+		"@types/react-dom": "^18.0.8",
+		"@typescript-eslint/eslint-plugin": "^5.42.1",
+		"eslint": "^8.27.0",
+		"eslint-plugin-react": "^7.31.10",
+		"typescript": "^4.8.4",
 		"typescript-eslint": "^0.0.1-alpha.0"
 	}
 }
