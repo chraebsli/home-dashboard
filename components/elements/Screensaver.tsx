@@ -19,7 +19,7 @@ const requestWakeLock = async () => {
 
 const getNextEvent = async (apiURL) => await fetch(`${apiURL}/calendar/next`).then(res => res.json());
 const getWeather = async (apiURL) => await fetch(`${apiURL}/weather/owm/screensaver`).then(res => res.json());
-const removeSpecialChars = (str: string) => str.replace(/[^a-zA-Z0-9 ]/g, "");
+const removeSpecialChars = (str: string) => str?.replace(/[^a-zA-Z0-9 ]/g, "");
 
 const Screensaver = ({sleep, resetSleep, apiURL}: {sleep: boolean, resetSleep, apiURL: string}) => {
 	const [date, setDate] = useState(new Date());
@@ -63,7 +63,7 @@ const Screensaver = ({sleep, resetSleep, apiURL}: {sleep: boolean, resetSleep, a
 						{!event.name ? "No events today" : ""}
 					</Typography>
 					<Typography variant={"h5"} sx={{color: "text.secondary", maxWidth: "40vw"}}>
-						{removeSpecialChars(event?.description.substring(0, 140)) || event?.location}
+						{removeSpecialChars(event?.description?.substring(0, 140)) || event?.location}
 					</Typography>
 				</Stack>
 				<Divider sx={{width: "30%", height: ".1rem"}} color={"grey"} />
